@@ -1,44 +1,252 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>COMING SOON</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/css/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-<link rel="manifest" href="/favicon_io/site.webmanifest">
-<script src="/js/scripts.js"></script>
-<style>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Driver Profit Calculator | Know What You Really Earn | BytLot</title>
+    <meta name="description" content="Estimate your real gig-work profit after fuel, maintenance, tires, depreciation, and other vehicle costs. Check a shift or compare an offer with your hourly target.">
+    <meta name="theme-color" content="#14382d">
+    <link rel="canonical" href="https://bytlot.com/">
 
-body,h1 {font-family: "Raleway", sans-serif}
-body, html {height: 100%}
-.bgimg {
-  background-image: url('/img/forestbridge.jpg');
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
-}
-</style>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BytLot">
+    <meta property="og:title" content="Driver Profit — Know the real number">
+    <meta property="og:description" content="Calculate estimated real profit for a shift or see whether an offer meets your target.">
+    <meta property="og:url" content="https://bytlot.com/">
+    <meta property="og:image" content="https://bytlot.com/img/og-driver-profit.png">
+    <meta property="og:image:width" content="1734">
+    <meta property="og:image:height" content="907">
+    <meta property="og:image:alt" content="Driver Profit — Know the real number.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Driver Profit — Know the real number">
+    <meta name="twitter:description" content="Calculate estimated real profit for a shift or see whether an offer meets your target.">
+    <meta name="twitter:image" content="https://bytlot.com/img/og-driver-profit.png">
 
-</head>
-<body>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script type="module" src="/js/app.js"></script>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">
-    BytLot
-  </div>
-  <div class="w3-display-middle">
-    <h1 class="w3-jumbo w3-animate-top">COMING SOON</h1>
-    <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p class="w3-large w3-center"><span id="counter"></span> left</p>
-  </div>
-  <div class="w3-display-bottomleft w3-padding-large">
-    Powered by BytLot LLC</a>
-  </div>
-</div>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebApplication",
+            "name": "BytLot Driver Profit",
+            "url": "https://bytlot.com/",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Any",
+            "isAccessibleForFree": true,
+            "description": "A client-side calculator that estimates gig-work profit after vehicle costs."
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What does “estimated real profit” mean?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Your entered payout minus estimated vehicle costs. It is before income and payroll taxes, and it is not an accounting record." }
+              },
+              {
+                "@type": "Question",
+                "name": "Does this work for DoorDash, Uber Eats, Amazon Flex, Lyft, Spark, and other gigs?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. Driver Profit is platform-neutral. It calculates from the payout, time, miles, and vehicle assumptions you enter." }
+              },
+              {
+                "@type": "Question",
+                "name": "Are my earnings or vehicle details stored or sent?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Calculations stay in your browser. The site may save only vehicle assumptions and your target rate on this device so you do not have to re-enter them." }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#calculator">Skip to calculator</a>
 
-</body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="BytLot home">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span>BytLot</span>
+      </a>
+      <span class="product-name">Driver Profit</span>
+      <span class="privacy-note">Private by design · calculated here</span>
+    </header>
 
+    <main id="calculator" class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Know the real number.</p>
+        <h1 id="page-title">Know what you really earned.</h1>
+        <p class="lede">See what is left after estimated fuel, maintenance, tires, depreciation, and other vehicle costs.</p>
+        <p class="platform-note">For delivery and gig work—using your numbers, not a universal dollars-per-mile rule.</p>
+      </section>
+
+      <div class="calculator-layout">
+        <section class="input-panel" aria-labelledby="workflow-heading">
+          <h2 id="workflow-heading" class="visually-hidden">Choose a Driver Profit workflow</h2>
+
+          <div class="mode-switch" role="tablist" aria-label="Calculator mode">
+            <button id="shift-tab" class="mode-button is-active" type="button" role="tab" aria-selected="true" aria-controls="shift-panel" tabindex="0" data-mode="shift">Shift profit</button>
+            <button id="offer-tab" class="mode-button" type="button" role="tab" aria-selected="false" aria-controls="offer-panel" tabindex="-1" data-mode="offer">Offer check</button>
+          </div>
+
+          <details id="vehicle-assumptions" class="assumptions-card assumptions-card--shared">
+            <summary>
+              <span>
+                <strong>Vehicle assumptions</strong>
+                <small id="assumptions-summary">Gas · 25 MPG · $3.50/gal · estimating cost…</small>
+              </span>
+              <span class="edit-label">Adjust</span>
+            </summary>
+
+            <div class="assumptions-body">
+              <div class="assumptions-title-row">
+                <div>
+                  <h3>Use costs that fit your vehicle</h3>
+                  <p>Starter estimates are editable—not current local prices or tax rates.</p>
+                </div>
+                <button id="reset-assumptions" class="text-button" type="button">Reset</button>
+              </div>
+
+              <fieldset class="vehicle-type-fieldset">
+                <legend>Vehicle type</legend>
+                <div class="segmented-control">
+                  <label><input type="radio" name="vehicle-type" value="gas" checked><span>Gasoline</span></label>
+                  <label><input type="radio" name="vehicle-type" value="ev"><span>Electric</span></label>
+                </div>
+              </fieldset>
+
+              <div id="gas-fields" class="field-grid assumption-grid">
+                <label class="field" for="mpg"><span>Fuel efficiency</span><span class="input-wrap"><input id="mpg" type="number" inputmode="decimal" min="0.1" step="any" value="25" required><span class="input-suffix">MPG</span></span></label>
+                <label class="field" for="fuel-price"><span>Fuel price</span><span class="input-wrap"><span class="input-prefix">$</span><input id="fuel-price" type="number" inputmode="decimal" min="0" step="any" value="3.50" required><span class="input-suffix">/gal</span></span></label>
+              </div>
+
+              <div id="ev-fields" class="field-grid assumption-grid" hidden>
+                <label class="field field--wide" for="ev-efficiency"><span>EV efficiency</span><span class="input-wrap"><input id="ev-efficiency" type="number" inputmode="decimal" min="0.1" step="any" value="3.5" required><select id="ev-efficiency-unit" aria-label="EV efficiency unit"><option value="miPerKwh">mi/kWh</option><option value="kwhPer100Mi">kWh/100 mi</option></select></span></label>
+                <label class="field" for="electricity-price"><span>Electricity price</span><span class="input-wrap"><span class="input-prefix">$</span><input id="electricity-price" type="number" inputmode="decimal" min="0" step="any" value="0.18" required><span class="input-suffix">/kWh</span></span></label>
+                <label class="field" for="charging-loss"><span>Charging loss</span><span class="input-wrap"><input id="charging-loss" type="number" inputmode="decimal" min="0" max="99.9" step="any" value="10" required><span class="input-suffix">%</span></span></label>
+              </div>
+
+              <fieldset class="cost-fieldset">
+                <legend>Other estimated costs per mile</legend>
+                <div class="field-grid cost-grid">
+                  <label class="field" for="maintenance"><span>Maintenance</span><span class="input-wrap"><span class="input-prefix">$</span><input id="maintenance" type="number" inputmode="decimal" min="0" step="any" value="0.10" required><span class="input-suffix">/mi</span></span></label>
+                  <label class="field" for="tires"><span>Tires</span><span class="input-wrap"><span class="input-prefix">$</span><input id="tires" type="number" inputmode="decimal" min="0" step="any" value="0.03" required><span class="input-suffix">/mi</span></span></label>
+                  <label class="field" for="depreciation"><span>Depreciation</span><span class="input-wrap"><span class="input-prefix">$</span><input id="depreciation" type="number" inputmode="decimal" min="0" step="any" value="0.15" required><span class="input-suffix">/mi</span></span></label>
+                  <label class="field" for="other-cost"><span>Other</span><span class="input-wrap"><span class="input-prefix">$</span><input id="other-cost" type="number" inputmode="decimal" min="0" step="any" value="0.02" required><span class="input-suffix">/mi</span></span></label>
+                </div>
+              </fieldset>
+              <p class="assumption-footnote">Tolls, parking, taxes, and fixed business expenses are not included. If useful, convert them to a per-mile estimate before adding them to “Other.”</p>
+            </div>
+          </details>
+
+          <div id="shift-panel" role="tabpanel" aria-labelledby="shift-tab" data-panel="shift">
+            <form id="shift-form" class="calculator-form">
+              <div class="section-heading">
+                <div>
+                  <p class="step-label">Completed shift</p>
+                  <h2>What did I really earn?</h2>
+                </div>
+                <span class="estimate-badge">Estimate</span>
+              </div>
+              <p class="form-intro">Enter base platform pay separately from tips and bonuses so nothing is counted twice.</p>
+              <div class="field-grid">
+                <label class="field" for="base-pay"><span>Base payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="base-pay" name="basePay" type="number" inputmode="decimal" min="0" step="any" placeholder="120.00" required></span></label>
+                <label class="field" for="tips"><span>Tips</span><span class="input-wrap"><span class="input-prefix">$</span><input id="tips" name="tips" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
+                <label class="field" for="bonuses"><span>Bonuses</span><span class="input-wrap"><span class="input-prefix">$</span><input id="bonuses" name="bonuses" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
+                <label class="field" for="hours-worked"><span>Total time worked</span><span class="input-wrap"><input id="hours-worked" name="hours" type="number" inputmode="decimal" min="0.01" step="any" placeholder="5.5" required><span class="input-suffix">hr</span></span><small>Include waiting and return time.</small></label>
+                <label class="field" for="miles-driven"><span>Total miles driven</span><span class="input-wrap"><input id="miles-driven" name="miles" type="number" inputmode="decimal" min="0" step="any" placeholder="72" required><span class="input-suffix">mi</span></span></label>
+              </div>
+              <p id="shift-error" class="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Calculate my real profit</button>
+            </form>
+          </div>
+
+          <div id="offer-panel" role="tabpanel" aria-labelledby="offer-tab" data-panel="offer" hidden>
+            <form id="offer-form" class="calculator-form">
+              <div class="section-heading">
+                <div>
+                  <p class="step-label">Before you accept</p>
+                  <h2>Does this offer meet my target?</h2>
+                </div>
+                <span class="estimate-badge">Estimate</span>
+              </div>
+              <p class="form-intro">Include realistic wait, pickup, drop-off, and return time. Return miles mean miles not already counted.</p>
+              <div class="field-grid">
+                <label class="field" for="offer-payout"><span>Expected total payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="offer-payout" name="offeredPayout" type="number" inputmode="decimal" min="0" step="any" placeholder="24.00" required></span></label>
+                <label class="field" for="offer-minutes"><span>Estimated total time</span><span class="input-wrap"><input id="offer-minutes" name="estimatedMinutes" type="number" inputmode="decimal" min="1" step="any" placeholder="45" required><span class="input-suffix">min</span></span></label>
+                <label class="field" for="offer-miles"><span>Pickup-to-drop-off miles</span><span class="input-wrap"><input id="offer-miles" name="workMiles" type="number" inputmode="decimal" min="0" step="any" placeholder="18" required><span class="input-suffix">mi</span></span></label>
+                <label class="field" for="deadhead-miles"><span>Extra return / deadhead</span><span class="input-wrap"><input id="deadhead-miles" name="deadheadMiles" type="number" inputmode="decimal" min="0" step="any" value="0" required><span class="input-suffix">mi</span></span><small>Only miles not already included above.</small></label>
+                <label class="field field--wide" for="target-hourly"><span>Your target profit per hour</span><span class="input-wrap"><span class="input-prefix">$</span><input id="target-hourly" name="targetHourlyProfit" type="number" inputmode="decimal" min="0" step="any" value="22" required><span class="input-suffix">/hr</span></span></label>
+              </div>
+              <p id="offer-error" class="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Check this offer</button>
+            </form>
+          </div>
+        </section>
+
+        <aside id="results" class="results-panel" aria-labelledby="results-title" aria-live="polite">
+          <p class="eyebrow">Your real number</p>
+          <h2 id="results-title">Estimated real profit</h2>
+          <p id="primary-result" class="primary-result" aria-label="No result yet">—</p>
+          <p id="result-support" class="result-support">Enter your details to see what remains after estimated vehicle costs.</p>
+
+          <dl id="result-list" class="result-list">
+            <div><dt>Real profit / hour</dt><dd>—</dd></div>
+            <div><dt>Gross earnings</dt><dd>—</dd></div>
+            <div><dt>Vehicle cost</dt><dd>—</dd></div>
+            <div><dt>Cost / mile</dt><dd>—</dd></div>
+          </dl>
+
+          <details id="breakdown" class="breakdown-card" hidden>
+            <summary>See calculation breakdown</summary>
+            <dl>
+              <div><dt>Energy</dt><dd id="breakdown-energy">—</dd></div>
+              <div><dt>Maintenance, tires, depreciation &amp; other</dt><dd id="breakdown-other">—</dd></div>
+              <div><dt>Total estimated vehicle cost</dt><dd id="breakdown-total">—</dd></div>
+            </dl>
+          </details>
+
+          <p class="local-note"><span aria-hidden="true">●</span> Calculated on this device. Nothing is sent to BytLot.</p>
+          <p class="result-disclaimer">Pre-tax estimate, not tax or financial advice. Your result is only as useful as your assumptions.</p>
+        </aside>
+      </div>
+
+      <section class="explanation-section" aria-labelledby="how-heading">
+        <div class="section-copy">
+          <p class="eyebrow">Transparent by default</p>
+          <h2 id="how-heading">From headline pay to the number that matters.</h2>
+          <p>Driver Profit subtracts an editable estimate of the vehicle cost created by your miles. It does not use the IRS mileage rate or make the accept/decline decision for you.</p>
+        </div>
+        <ol class="method-list">
+          <li><span>01</span><strong>Add your pay</strong><p>Keep base payout, tips, and bonuses separate.</p></li>
+          <li><span>02</span><strong>Price the miles</strong><p>Estimate energy, upkeep, tires, depreciation, and other costs.</p></li>
+          <li><span>03</span><strong>See what remains</strong><p>Compare estimated profit with your own hourly target.</p></li>
+        </ol>
+      </section>
+
+      <section class="faq-section" aria-labelledby="faq-heading">
+        <p class="eyebrow">Plain answers</p>
+        <h2 id="faq-heading">Driver Profit FAQ</h2>
+        <div class="faq-list">
+          <details><summary>What does “estimated real profit” mean?</summary><p>Your entered payout minus estimated vehicle costs. It is before income and payroll taxes, and it is not an accounting record.</p></details>
+          <details><summary>Does this work for DoorDash, Uber Eats, Amazon Flex, Lyft, Spark, and other gigs?</summary><p>Yes. Driver Profit is platform-neutral. It calculates from the payout, time, miles, and vehicle assumptions you enter.</p></details>
+          <details><summary>Why include return or deadhead miles?</summary><p>Unpaid miles still create vehicle cost. Add only return or repositioning miles that are not already included in your pickup-to-drop-off estimate.</p></details>
+          <details><summary>What vehicle costs are included?</summary><p>Fuel or electricity, maintenance, tires, depreciation, and an editable “Other” rate. Tolls, parking, taxes, and fixed costs are excluded; you can convert them to a per-mile estimate before adding them to “Other.”</p></details>
+          <details><summary>Is this the same as the IRS mileage rate?</summary><p>No. This is an estimate of your actual vehicle cost based on your assumptions. It is not a tax deduction calculation.</p></details>
+          <details><summary>Are my earnings or vehicle details stored or sent?</summary><p>Calculations stay in your browser. The site may save only vehicle assumptions and your target rate on this device so you do not have to re-enter them.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>BytLot</strong><span>Know the real number.</span></div>
+      <p>Driver Profit provides editable estimates—not tax, legal, or financial advice.</p>
+    </footer>
+  </body>
+</html>

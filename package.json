@@ -1,5 +1,14 @@
 {
-  "dependencies": {
-    "jshint": "^2.13.6"
+  "name": "bytlot-driver-profit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "npm test && node scripts/validate-site.mjs",
+    "serve": "python3 -m http.server 4173"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
