@@ -29,8 +29,8 @@ No platform-specific rules, accounts, tax advice, trip tracking, server-side his
 
 ## Evidence, analytics, and infrastructure
 
-Initial evidence is qualitative/product reasoning only; analytics data is unavailable in this workspace. No analytics was invented or added. Infrastructure remains static GitHub Pages behind external Cloudflare, with no expected incremental recurring cost. Production deployment and external Cloudflare/Search Console verification were not performed as part of this plan.
+Initial evidence is qualitative/product reasoning only; analytics data is unavailable in this workspace. No analytics was invented or added. Infrastructure remains static GitHub Pages behind external Cloudflare, with no expected incremental recurring cost. Application release commit `3016f6d` was published and production-smoke-tested on 2026-08-28. Cloudflare edge delivery was observed, but Cloudflare configuration and Search Console were not directly inspected.
 
 ## Follow-up
 
-The owner should review starter assumptions, publish through the existing hosting path, and then supply dated usage/search evidence before the roadmap is reprioritized.
+The owner should review starter assumptions with real users and supply dated usage/search evidence before the roadmap is reprioritized.

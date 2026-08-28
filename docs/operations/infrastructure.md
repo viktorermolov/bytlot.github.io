@@ -8,6 +8,8 @@ User → Cloudflare → GitHub Pages → client-side application
 
 The repository is a static GitHub Pages site with `bytlot.com` configured through a CNAME. Cloudflare exists outside this repository; no Cloudflare configuration or direct connector is available here. GitHub access is available through a connector.
 
+The Driver Profit MVP was published from `master` on 2026-08-28. GitHub Pages reported the application release commit as built, the custom domain returned HTTPS `200`, Cloudflare redirected HTTP to HTTPS, and production assets and calculator workflows passed smoke tests. See [`deployments.md`](deployments.md) for the durable verification record.
+
 ## Cost and dependencies
 
 The MVP targets approximately zero incremental recurring cost. It relies on existing GitHub Pages and the external Cloudflare/domain setup. No paid service, backend, database, analytics provider, or server-side runtime is required by the MVP.

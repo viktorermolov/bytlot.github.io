@@ -24,4 +24,6 @@
 
 ## Verification record
 
-Completed locally on 2026-08-28. `npm run check` passed the formula suite and static-site validator; JavaScript syntax and Git whitespace checks passed. Browser smoke tests covered 320 px and 390 px mobile viewports plus a 1440 px desktop viewport, both calculator workflows, exact-cent rounding, keyboard tab behavior, labels, focus, local asset loading, horizontal overflow, and console errors. This checklist records deployment readiness; it does not assert that production was published or that external Cloudflare/Search Console settings were inspected.
+Completed locally on 2026-08-28. `npm run check` passed the formula suite and static-site validator; JavaScript syntax and Git whitespace checks passed. Browser smoke tests covered 320 px and 390 px mobile viewports plus a 1440 px desktop viewport, both calculator workflows, exact-cent rounding, keyboard tab behavior, labels, focus, local asset loading, horizontal overflow, and console errors.
+
+Production verification completed on 2026-08-28 for application release commit `3016f6d`. GitHub Pages reported the commit as built. `https://bytlot.com/` returned `200`, HTTP redirected to HTTPS, required static assets returned `200`, both gasoline and EV calculator workflows produced expected results on a 390 px viewport, keyboard tabs worked, and the browser console was clean. Cloudflare edge delivery was observed; Cloudflare configuration and Search Console were not directly inspected.

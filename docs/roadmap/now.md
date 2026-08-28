@@ -1,10 +1,10 @@
 # Now
 
-Review and publish the completed, mobile-first Driver Profit MVP.
+Operate the published Driver Profit MVP and gather evidence before expanding it.
 
-- Review the two implemented workflows and their starter vehicle assumptions with the owner.
-- Publish the prepared static site through the existing GitHub Pages and Cloudflare setup.
-- After release, obtain dated usage/search evidence through the documented owner data-request process before changing priorities.
+- Monitor availability and collect qualitative feedback on the two workflows and starter assumptions.
+- Obtain dated usage/search evidence through the documented owner data-request process before changing priorities.
+- Keep calculation changes tested and independently reviewed when consequential.
 - Do not introduce accounts, backend infrastructure, payment systems, analytics scripts, or platform-specific logic.
 
-The implementation, automated checks, independent formula review, and local browser QA are complete. Success is a useful public calculator at approximately zero incremental infrastructure cost. Usage success metrics are not yet available; do not substitute estimates for them.
+The MVP is live at `https://bytlot.com/`; implementation, automated checks, independent formula review, and production browser QA are complete. Usage success metrics are not yet available; do not substitute estimates for them.
