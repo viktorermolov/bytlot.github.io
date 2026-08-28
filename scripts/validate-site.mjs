@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const html = readFileSync(join(root, "index.html"), "utf8");
+const css = readFileSync(join(root, "css/styles.css"), "utf8");
 
 assert.match(html, /<html lang="en">/);
 assert.match(html, /<title>Driver Profit Calculator/);
@@ -15,10 +16,14 @@ assert.match(html, /<h1[^>]*>Know what you really earned\.<\/h1>/);
 assert.match(html, /<link rel="icon" href="\/favicon_io\/favicon\.ico\?v=20260828-brand" sizes="16x16 32x32">/);
 assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/favicon_io\/bytlot-mark\.svg">/);
 assert.match(html, /<img class="brand-mark" src="\/favicon_io\/bytlot-mark\.svg" alt="" width="32" height="32">/);
-assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260828-brand">/);
+assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260828-rhythm">/);
 assert.match(html, />Charging loss estimate<\/label>/);
 assert.match(html, /aria-describedby="charging-loss-help"/);
 assert.match(html, />Energy lost between the outlet and battery\.<\/small>/);
+assert.match(html, /<label class="field field--wide" for="miles-driven">/);
+assert.match(css, /--space-form-section: 22px;/);
+assert.match(css, /\.calculate-button \{[\s\S]*?margin-top: var\(--space-form-section\);/);
+assert.match(css, /\.form-error:not\(\[hidden\]\) \+ \.calculate-button \{ margin-top: 12px; \}/);
 const structuredDataMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 assert.ok(structuredDataMatch, "Missing JSON-LD structured data.");
 const structuredData = JSON.parse(structuredDataMatch[1]);

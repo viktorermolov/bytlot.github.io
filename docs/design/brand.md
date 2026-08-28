@@ -30,6 +30,8 @@ Use generous space, restrained rounding, strong hierarchy, thin borders, and min
 - Driver Profit is a working surface. Keep its primary controls and result prominent.
 - Form labels remain above controls; units stay inside the control shell; helper copy sits below and uses `aria-describedby` when it clarifies an input.
 - Grid rows must use `align-items: start` so helper text never stretches or vertically displaces a neighboring input.
+- Keep primary form actions one shared form-section space (22 px) below the final field group; when a validation message is visible, keep 12 px between the message and action.
+- Preserve balanced desktop rows. In a two-column form with an odd final field, span that field across both columns rather than leaving an empty half-row.
 - Maintain 44 px minimum touch targets, visible keyboard focus, and meaning that does not rely on color alone.
 - Support 320 px and wider without horizontal scrolling. Check 320/390 px mobile, the 800 px layout boundary, and desktop before release.
 
