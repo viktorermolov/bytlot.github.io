@@ -12,6 +12,7 @@
 
 - [x] Mobile numeric entry, layout, and results are checked.
 - [x] Keyboard flow, labels, focus visibility, contrast, and validation are checked.
+- [x] Logo, favicon, visual tokens, and components follow the brand and design-stewardship guide.
 - [x] Permanent URL, title, description, headings, and crawlable content are verified where applicable.
 - [x] Static deployment behavior and broken links are checked.
 
