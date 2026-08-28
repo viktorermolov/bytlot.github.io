@@ -129,7 +129,7 @@
               <div id="ev-fields" class="field-grid assumption-grid" hidden>
                 <label class="field field--wide" for="ev-efficiency"><span>EV efficiency</span><span class="input-wrap"><input id="ev-efficiency" type="number" inputmode="decimal" min="0.1" step="any" value="3.5" required><select id="ev-efficiency-unit" aria-label="EV efficiency unit"><option value="miPerKwh">mi/kWh</option><option value="kwhPer100Mi">kWh/100 mi</option></select></span></label>
                 <label class="field" for="electricity-price"><span>Electricity price</span><span class="input-wrap"><span class="input-prefix">$</span><input id="electricity-price" type="number" inputmode="decimal" min="0" step="any" value="0.18" required><span class="input-suffix">/kWh</span></span></label>
-                <label class="field" for="charging-loss"><span>Charging loss</span><span class="input-wrap"><input id="charging-loss" type="number" inputmode="decimal" min="0" max="99.9" step="any" value="10" required><span class="input-suffix">%</span></span></label>
+                <div class="field"><label for="charging-loss">Charging loss estimate</label><span class="input-wrap"><input id="charging-loss" type="number" inputmode="decimal" min="0" max="99.9" step="any" value="10" aria-describedby="charging-loss-help" required><span class="input-suffix">%</span></span><small id="charging-loss-help">Energy lost between the outlet and battery.</small></div>
               </div>
 
               <fieldset class="cost-fieldset">

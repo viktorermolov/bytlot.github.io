@@ -35,7 +35,7 @@ Keep full precision inside the engine and round only displayed currency/rates. Z
 
 ### Starter assumptions
 
-The UI uses round, editable starter values to reduce first-use friction: gas at 25 MPG and $3.50/gal; EV at 3.5 mi/kWh, $0.18/kWh, and 10% charging loss; plus $0.10 maintenance, $0.03 tires, $0.15 depreciation, and $0.02 other per mile. These are product defaults, not measured local prices, personalized estimates, tax rates, or claims about a typical driver. The interface labels them as starters and lets the user replace or zero every category.
+The UI uses round, editable starter values to reduce first-use friction: gas at 25 MPG and $3.50/gal; EV at 3.5 mi/kWh, $0.18/kWh, and a 10% charging loss estimate; plus $0.10 maintenance, $0.03 tires, $0.15 depreciation, and $0.02 other per mile. Charging loss means energy lost between the outlet and battery. These are product defaults, not measured local prices, personalized estimates, tax rates, or claims about a typical driver. The interface labels them as starters and lets the user replace or zero every category.
 
 ## Non-goals
 
