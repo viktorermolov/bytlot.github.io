@@ -12,9 +12,10 @@ assert.match(html, /<meta name="description"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/bytlot\.com\/">/);
 assert.match(html, /property="og:image" content="https:\/\/bytlot\.com\/img\/og-driver-profit\.png"/);
 assert.match(html, /<h1[^>]*>Know what you really earned\.<\/h1>/);
-assert.match(html, /<link rel="icon" href="\/favicon_io\/favicon\.ico" sizes="16x16 32x32">/);
+assert.match(html, /<link rel="icon" href="\/favicon_io\/favicon\.ico\?v=20260828-brand" sizes="16x16 32x32">/);
 assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/favicon_io\/bytlot-mark\.svg">/);
 assert.match(html, /<img class="brand-mark" src="\/favicon_io\/bytlot-mark\.svg" alt="" width="32" height="32">/);
+assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260828-brand">/);
 assert.match(html, />Charging loss estimate<\/label>/);
 assert.match(html, /aria-describedby="charging-loss-help"/);
 assert.match(html, />Energy lost between the outlet and battery\.<\/small>/);
@@ -45,7 +46,8 @@ const manifest = JSON.parse(readFileSync(join(root, "favicon_io/site.webmanifest
 assert.equal(manifest.name, "BytLot Driver Profit");
 assert.ok(manifest.icons.some((icon) => icon.purpose === "maskable"), "Missing maskable app icon.");
 for (const icon of manifest.icons) {
-  assert.ok(existsSync(join(root, icon.src)), `Missing manifest icon: ${icon.src}`);
+  const iconPath = icon.src.split(/[?#]/)[0];
+  assert.ok(existsSync(join(root, iconPath)), `Missing manifest icon: ${icon.src}`);
 }
 
 assert.ok(existsSync(join(root, "robots.txt")), "Missing robots.txt.");

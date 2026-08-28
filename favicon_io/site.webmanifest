@@ -3,13 +3,13 @@
   "short_name": "Driver Profit",
   "icons": [
     {
-      "src": "/favicon_io/android-chrome-192x192.png",
+      "src": "/favicon_io/android-chrome-192x192.png?v=20260828-brand",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/favicon_io/android-chrome-512x512.png",
+      "src": "/favicon_io/android-chrome-512x512.png?v=20260828-brand",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
