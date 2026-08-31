@@ -1,6 +1,6 @@
 # Metrics and evidence
 
-No product analytics instrumentation is active initially. There is no Cloudflare or Search Console connector available to this workspace. A GitHub connector is available, but it does not supply product or search behavior metrics.
+No product analytics instrumentation is active initially. No Cloudflare Analytics or Search Console dataset is connected to this workspace. Repository and public-page access do not supply product usage, index coverage, or search-query performance metrics.
 
 ## What can answer which question
 

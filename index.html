@@ -3,24 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Driver Profit Calculator | Know What You Really Earn | BytLot</title>
-    <meta name="description" content="Estimate your real gig-work profit after fuel, maintenance, tires, depreciation, and other vehicle costs. Check a shift or compare an offer with your hourly target.">
+    <title>Driver Profit Calculator for Delivery &amp; Gig Work | BytLot</title>
+    <meta name="description" content="Estimate delivery and gig-work profit after fuel or charging, maintenance, tires, depreciation, and other vehicle costs. Check a shift or compare an offer.">
     <meta name="theme-color" content="#14382d">
     <link rel="canonical" href="https://bytlot.com/">
 
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="BytLot">
-    <meta property="og:title" content="Driver Profit — Know the real number">
-    <meta property="og:description" content="Calculate estimated real profit for a shift or see whether an offer meets your target.">
+    <meta property="og:title" content="Driver Profit Calculator for Delivery &amp; Gig Work">
+    <meta property="og:description" content="Estimate profit after fuel or charging and other vehicle costs. Check a completed shift or compare an offer with your target.">
     <meta property="og:url" content="https://bytlot.com/">
     <meta property="og:image" content="https://bytlot.com/img/og-driver-profit.png">
     <meta property="og:image:width" content="1734">
     <meta property="og:image:height" content="907">
-    <meta property="og:image:alt" content="Driver Profit — Know the real number.">
+    <meta property="og:image:alt" content="BytLot Driver Profit calculator — know the real number.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Driver Profit — Know the real number">
-    <meta name="twitter:description" content="Calculate estimated real profit for a shift or see whether an offer meets your target.">
+    <meta name="twitter:title" content="Driver Profit Calculator for Delivery &amp; Gig Work">
+    <meta name="twitter:description" content="Estimate profit after fuel or charging and other vehicle costs. Check a completed shift or compare an offer with your target.">
     <meta name="twitter:image" content="https://bytlot.com/img/og-driver-profit.png">
+    <meta name="twitter:image:alt" content="BytLot Driver Profit calculator — know the real number.">
 
     <link rel="icon" href="/favicon_io/favicon.ico?v=20260828-brand" sizes="16x16 32x32">
     <link rel="icon" type="image/svg+xml" href="/favicon_io/bytlot-mark.svg">
@@ -36,33 +38,23 @@
         "@context": "https://schema.org",
         "@graph": [
           {
+            "@type": "WebSite",
+            "@id": "https://bytlot.com/#website",
+            "url": "https://bytlot.com/",
+            "name": "BytLot",
+            "inLanguage": "en-US"
+          },
+          {
             "@type": "WebApplication",
+            "@id": "https://bytlot.com/#driver-profit",
             "name": "BytLot Driver Profit",
             "url": "https://bytlot.com/",
+            "isPartOf": { "@id": "https://bytlot.com/#website" },
             "applicationCategory": "FinanceApplication",
             "operatingSystem": "Any",
             "isAccessibleForFree": true,
-            "description": "A client-side calculator that estimates gig-work profit after vehicle costs."
-          },
-          {
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What does “estimated real profit” mean?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Your entered payout minus estimated vehicle costs. It is before income and payroll taxes, and it is not an accounting record." }
-              },
-              {
-                "@type": "Question",
-                "name": "Does this work for DoorDash, Uber Eats, Amazon Flex, Lyft, Spark, and other gigs?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Yes. Driver Profit is platform-neutral. It calculates from the payout, time, miles, and vehicle assumptions you enter." }
-              },
-              {
-                "@type": "Question",
-                "name": "Are my earnings or vehicle details stored or sent?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Calculations stay in your browser. The site may save only vehicle assumptions and your target rate on this device so you do not have to re-enter them." }
-              }
-            ]
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "description": "A free browser-based calculator that estimates delivery and gig-work profit after editable vehicle costs."
           }
         ]
       }
@@ -83,8 +75,8 @@
     <main id="calculator" class="page-shell">
       <section class="intro" aria-labelledby="page-title">
         <p class="eyebrow">Know the real number.</p>
-        <h1 id="page-title">Know what you really earned.</h1>
-        <p class="lede">See what is left after estimated fuel, maintenance, tires, depreciation, and other vehicle costs.</p>
+        <h1 id="page-title">Driver profit calculator.</h1>
+        <p class="lede">Estimate what you really earned after fuel or charging, maintenance, tires, depreciation, and other vehicle costs.</p>
         <p class="platform-note">For delivery and gig work—using your numbers, not a universal dollars-per-mile rule.</p>
       </section>
 
@@ -222,8 +214,8 @@
       <section class="explanation-section" aria-labelledby="how-heading">
         <div class="section-copy">
           <p class="eyebrow">Transparent by default</p>
-          <h2 id="how-heading">From headline pay to the number that matters.</h2>
-          <p>Driver Profit subtracts an editable estimate of the vehicle cost created by your miles. It does not use the IRS mileage rate or make the accept/decline decision for you.</p>
+          <h2 id="how-heading">How the estimate works.</h2>
+          <p>Driver Profit adds base payout, tips, and bonuses, then subtracts total miles × your editable vehicle cost per mile. For Offer Check, minimum payout combines that vehicle cost with your hourly target for the estimated time. Starter values are examples—not local averages, tax rates, or personalized advice.</p>
         </div>
         <ol class="method-list">
           <li><span>01</span><strong>Add your pay</strong><p>Keep base payout, tips, and bonuses separate.</p></li>
