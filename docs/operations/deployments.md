@@ -27,3 +27,16 @@ Cloudflare configuration and Search Console were not directly inspected because 
 - **Privacy and dependencies:** no analytics, external runtime dependency, user-data transmission, backend, or paid service was introduced
 
 Search Console was not connected, so this release does not claim indexation, rankings, query demand, field Core Web Vitals, or traffic impact. The owner follow-up is to verify the domain property, submit the sitemap, inspect the canonical homepage, request one recrawl, and record a dated search baseline.
+
+## 2026-08-31 — PageSpeed follow-up
+
+- **Application release commit:** [`d59a837`](https://github.com/viktorermolov/bytlot.github.io/commit/d59a837)
+- **Source:** `master`, repository root
+- **Target:** [https://bytlot.com/](https://bytlot.com/)
+- **Report baseline:** the supplied mobile PageSpeed Insights run scored Performance `99`, Accessibility `100`, Best Practices `100`, and SEO `100`; laboratory metrics were FCP `1.5 s`, LCP `1.6 s`, TBT `0 ms`, CLS `0.008`, and Speed Index `2.4 s`. The report contained no Chrome UX Report field data.
+- **Application changes:** the calculation module is preloaded with an exact versioned URL; the application module and SVG mark use versioned URLs; validation now guards the preload/import match and privacy language. The interface now says calculator inputs remain on the device without making a broader claim about edge telemetry.
+- **Deliberate non-change:** the `4.7 KiB` stylesheet remains external. The reported `160 ms` render-blocking opportunity did not justify duplicating critical CSS or risking flash, layout shift, and maintenance drift while LCP and CLS were already healthy.
+- **Production verification:** the versioned application and calculation modules each loaded once; both EV workflows returned the expected `$74.50` and `$24.69/hr`; 320/390/800/801/1440 px checks had no horizontal overflow, the responsive breakpoint behaved correctly, and the browser console was clean.
+- **Edge follow-up:** Cloudflare still injects its Web Analytics RUM beacon and applies a four-hour browser TTL to versioned static assets. Disabling automatic RUM and adding a long-lived immutable cache rule require an authenticated Cloudflare control-plane session and were not changed in this release.
+
+No post-release PageSpeed score is claimed: a score is a sampled laboratory result and was not rerun with an available performance tracer. This record verifies the deployed source and production behavior instead.
