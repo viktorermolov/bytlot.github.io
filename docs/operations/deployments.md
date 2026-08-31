@@ -40,3 +40,18 @@ Search Console was not connected, so this release does not claim indexation, ran
 - **Edge follow-up:** Cloudflare still injects its Web Analytics RUM beacon and applies a four-hour browser TTL to versioned static assets. Disabling automatic RUM and adding a long-lived immutable cache rule require an authenticated Cloudflare control-plane session and were not changed in this release.
 
 No post-release PageSpeed score is claimed: a score is a sampled laboratory result and was not rerun with an available performance tracer. This record verifies the deployed source and production behavior instead.
+
+## 2026-08-31 — Anonymous feedback
+
+- **Application release commit:** [`94f30b4`](https://github.com/viktorermolov/bytlot.github.io/commit/94f30b49b17d1d4bce2e376163e610f3c46e7240)
+- **GitHub Pages run:** `33443458794`, completed successfully
+- **Source and target:** `master`, repository root, [https://bytlot.com/](https://bytlot.com/)
+- **Backend ordering:** the production D1 migration completed before the first secret-created Worker version; the Turnstile secret remained outside Git; the narrow `https://bytlot.com/api/feedback*` route was deployed before the static frontend
+- **Static publication:** production served the Feedback action, versioned feedback module/styles, and the hostname-restricted widget's public sitekey
+- **Browser round trip:** Turnstile loaded only after the explicit Feedback action; a controlled non-sensitive submission succeeded; authenticated, logging-disabled Wrangler retrieved exactly the matching allowlisted D1 row; no raw message was committed
+- **Cleanup:** the exact controlled smoke row was deleted and the zero-match result was verified; unrelated feedback remained untouched and pending review
+- **Product and responsive smoke:** Shift Profit and Offer Check returned numeric results at 390 px; 390 px and 1440 px had no horizontal overflow; the mobile bottom sheet and desktop dialog fit; the browser console was clean
+- **API and static smoke:** representative exact/query/method/origin/body rejection paths failed closed with generic `no-store` responses, while `/`, an application asset, `robots.txt`, and `sitemap.xml` returned `200`
+- **Release checks:** a clean offline install reported zero vulnerabilities; all 89 automated tests, site validation, Wrangler dry run, JavaScript syntax, secret/former-entity scans, and Git whitespace checks passed; independent post-fix review found no P0–P2 findings
+
+Cloudflare plan and aggregate account usage were not inspected. The feature's incremental-cost estimate remains conditionally `$0/month` only while the account stays within the documented Workers, D1, and Turnstile Free boundaries.

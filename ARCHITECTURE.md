@@ -17,7 +17,7 @@ Production uses the custom-domain root, so application and icon URLs are root-ab
 - Presentation code should not contain the authoritative formula logic. Formula behavior must be deterministic, documented, and testable.
 - The calculation model is platform-neutral: no provider-specific payout rules or default assumptions belong in the core.
 
-## Feedback extension (backend deployed; frontend release pending)
+## Feedback extension
 
 The accepted feedback architecture is the smallest explicit server-side exception to the client-only product boundary:
 
@@ -36,10 +36,10 @@ The browser may send only `feedbackType`, `message`, a Turnstile token, and coar
 
 Security is fail-closed: exact method/path/origin and JSON media type, a 16 KiB body cap, feedback/context allowlists, 10–2,000-character messages, single-use server-side Turnstile verification with expected hostname and action, a fixed non-identifying rate-limit key, and bound D1 parameters are release requirements. Responses and logs must not echo messages, tokens, secrets, database details, or verification internals. Calculator privacy language remains true because calculator inputs and results are excluded from this separate, explicit submission.
 
-On 2026-08-31 the account-pinned D1 database, hostname-restricted Turnstile widget, remote migration, Worker secret binding, and production Worker route were provisioned and the backend rejection paths passed smoke tests. The static frontend and production browser submission/retrieval round trip remain separate release gates until the corresponding GitHub Pages commit is published and verified.
+On 2026-08-31 the account-pinned D1 database, hostname-restricted Turnstile widget, remote migration, Worker secret binding, and production Worker route were provisioned before the static frontend was published. Release commit `94f30b4` then passed the live Turnstile submission, D1 retrieval, responsive-layout, calculator-regression, and generic error-response gates. The controlled smoke row was removed by an exact predicate after verification; unrelated feedback remained untouched.
 
 ## Change triggers
 
-Add infrastructure only for a demonstrated requirement, such as the protected Turnstile secret and durable anonymous feedback now under implementation, a payment webhook, authentication, shared synchronized data, or another trusted server-side operation. First compare remaining client-only, a Cloudflare Worker, managed alternatives, and postponement. Record the limitation, evidence, cost range, risks, and owner decision in an infrastructure proposal/decision record.
+Add infrastructure only for a demonstrated requirement, such as a payment webhook, authentication, shared synchronized data, or another trusted server-side operation beyond the released feedback exception. First compare remaining client-only, a Cloudflare Worker, managed alternatives, and postponement. Record the limitation, evidence, cost range, risks, and owner decision in an infrastructure proposal/decision record.
 
 See [`docs/operations/infrastructure.md`](docs/operations/infrastructure.md) for current status and [`docs/decisions/`](docs/decisions/) for rationale.

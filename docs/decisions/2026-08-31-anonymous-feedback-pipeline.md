@@ -1,7 +1,7 @@
 # Decision: Anonymous feedback pipeline
 
 - **Date:** 2026-08-31
-- **Status:** accepted; backend provisioned and deployed, browser round trip pending
+- **Status:** accepted and released
 
 ## Context
 
@@ -56,6 +56,6 @@ Primary sources: [Workers pricing](https://developers.cloudflare.com/workers/pla
 
 ## Consequences and review triggers
 
-Provisioning used the owner's Cloudflare OAuth authorization, a pinned D1 database identifier, a hostname-restricted Turnstile pair, a Worker secret outside Git, and the narrow route pattern. The remote migration was applied before the first secret-created Worker version. Backend deployment verifies route/handler fail-closed behavior and D1 migration; complete release must separately verify the published Turnstile form flow and absence of calculator regressions.
+Provisioning used the owner's Cloudflare OAuth authorization, a pinned D1 database identifier, a hostname-restricted Turnstile pair, a Worker secret outside Git, and the narrow route pattern. The remote migration was applied before the first secret-created Worker version. Release commit `94f30b4` subsequently passed the published Turnstile submission, D1 retrieval, responsive layout, calculator regression, and generic fail-closed response checks. The exact controlled smoke row was removed after verification without touching unrelated feedback.
 
 Revisit this decision if measured usage approaches a Free hard cap, the database approaches 500 MB, the 12-month manual retention process proves unreliable, review volume justifies moderation tooling, or authenticated connector support materially improves least-privilege access.

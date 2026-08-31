@@ -2,10 +2,10 @@
 
 Operate the published Driver Profit MVP and gather evidence before expanding it.
 
-- Monitor availability and, after the remaining static release plus production round trip, collect explicit qualitative feedback on the two workflows and starter assumptions.
+- Monitor availability and collect explicit qualitative feedback on the two workflows and starter assumptions through the released anonymous-feedback path.
 - Obtain dated usage/search evidence through the documented owner data-request process before changing priorities.
 - Establish or verify Search Console ownership, submit the canonical sitemap, and record a dated search baseline before creating additional search-targeted pages.
 - Keep calculation changes tested and independently reviewed when consequential.
-- Keep the only active backend expansion scoped to the reviewed anonymous-feedback Worker, Turnstile, and D1 pipeline. Do not introduce accounts, payment systems, analytics scripts, an admin dashboard, or platform-specific calculation logic.
+- Keep the released backend exception scoped to the reviewed anonymous-feedback Worker, Turnstile, and D1 pipeline. Do not introduce accounts, payment systems, analytics scripts, an admin dashboard, or platform-specific calculation logic.
 
-The calculator MVP is live at `https://bytlot.com/`; its implementation, automated checks, independent formula review, and production browser QA are complete. The anonymous-feedback backend is Cloudflare-provisioned and deployed; follow the active execution plan for the remaining static frontend publication and controlled browser submission/retrieval gate. Usage success metrics are not yet available; do not substitute estimates for them.
+The calculator MVP and anonymous-feedback path are live at `https://bytlot.com/`; their implementation, automated checks, independent reviews, and production browser QA are complete. Follow the feedback review workflow for future evidence and keep raw messages out of Git. Usage success metrics are not yet available; do not substitute estimates for them.

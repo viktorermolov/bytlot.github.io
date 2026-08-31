@@ -14,7 +14,7 @@ The Driver Profit MVP was published from `master` on 2026-08-28. GitHub Pages re
 
 The deployed MVP targets approximately zero incremental recurring cost. It relies on existing GitHub Pages and the external Cloudflare/domain setup. No paid service, backend, database, analytics provider, or server-side runtime is required by the deployed calculator.
 
-On 2026-08-31 the feedback D1 database, hostname-restricted Turnstile widget, remote migration, Worker secret binding, and production route were provisioned through the authenticated Wrangler fallback. Backend rejection-path smoke tests passed while normal GitHub Pages routes remained available. The browser submission/retrieval round trip remains pending until the matching frontend commit is published. No account-wide usage or billing snapshot is available, so the `$0` estimate below remains conditional.
+On 2026-08-31 the feedback D1 database, hostname-restricted Turnstile widget, remote migration, Worker secret binding, and production route were provisioned through the authenticated Wrangler fallback. Backend rejection-path smoke tests passed while normal GitHub Pages routes remained available. The matching frontend was then published and passed a controlled browser submission plus D1 retrieval round trip. No account-wide usage or billing snapshot is available, so the `$0` estimate below remains conditional.
 
 The tracked production URLs assume the `bytlot.com` domain root. Repository-subpath hosting is not a supported release target; serve the repository root when testing locally.
 
@@ -28,7 +28,7 @@ Browser-cache TTL and RUM injection are Cloudflare control-plane settings, not G
 
 ## Anonymous-feedback path
 
-The deployed backend and release-gated frontend use this routing shape:
+The deployed backend and frontend use this routing shape:
 
 ```text
 Visitor → GitHub Pages frontend
@@ -68,14 +68,14 @@ npm run feedback:deploy
 
 `feedback:deploy` first runs the complete release check, repeats the guard, verifies the secret name, reapplies any pending migrations, and only then deploys the Worker. A failed authentication, account match, secret check, migration, or Worker deployment stops the sequence. The guard never runs Git, commits, pushes, publishes GitHub Pages, or submits production feedback.
 
-Keep the remaining gates explicit and in this order:
+Keep these gates explicit and in this order for future feedback releases:
 
 1. Run the guarded Worker deployment and retain its non-secret result for the release record.
 2. Verify the production API handler and representative rejection paths while confirming normal site routes still reach GitHub Pages.
 3. Publish the static frontend separately through the reviewed GitHub Pages workflow only after the Worker gate passes.
 4. In the published browser flow, send one controlled non-sensitive message, verify exactly one D1 row, retrieve it with `npm run feedback:fetch`, and record only sanitized evidence.
 
-The first two steps cannot prove the full Turnstile browser round trip because the production widget is hostname-bound and the frontend is intentionally not published by the Worker guard. Therefore the successful submission remains a distinct post-publication gate rather than being simulated or silently automated.
+The first two steps cannot prove the full Turnstile browser round trip because the production widget is hostname-bound and the frontend is intentionally not published by the Worker guard. Therefore every relevant release retains the successful submission as a distinct post-publication gate rather than simulating or silently automating it.
 
 ## Verified pricing boundary
 
@@ -101,6 +101,6 @@ Primary sources:
 
 ## Provisioning and review trigger
 
-Provisioning and backend deployment are complete; public release still requires the static frontend commit plus the controlled production submission/retrieval gate. Before describing actual billing as `$0`, inspect the account plan and aggregate account-wide usage through an authorized source; repository configuration alone proves only that this architecture fits the documented Free limits.
+Provisioning, backend deployment, static publication, and the controlled production submission/retrieval gate are complete. Before describing actual billing as `$0`, inspect the account plan and aggregate account-wide usage through an authorized source; repository configuration alone proves only that this architecture fits the documented Free limits.
 
 Revisit the architecture before upgrading when daily hard-cap pressure, a 500 MB feedback database, unacceptable quota-related unavailability, a new retention obligation, or measured review volume justifies a change. Give the owner visibility before any recurring expense.

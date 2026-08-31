@@ -1,7 +1,7 @@
 # Execution plan: anonymous user feedback
 
 - **Date:** 2026-08-31
-- **Status:** active; production backend deployed, static frontend and browser round trip pending
+- **Status:** complete; production backend, static frontend, and browser round trip verified
 - **Owner:** site-owning implementation agent
 - **Review roles:** Infrastructure & Economics, Architecture, Security & Privacy, Product, Design Steward, Analytics, QA, Documentation
 
@@ -26,11 +26,11 @@ Calculator inputs, assumptions, and results remain browser-local. Feedback is th
 
 ## Current implementation and provisioning status
 
-As of 2026-08-31, the shared working tree contains the accessible feedback UI, lazy-loaded client module, dependency-free Worker, D1 migration, rate-limit/D1 bindings, Worker and client tests, Wrangler commands, and ignored local secret/state paths. Local development now requires Node.js 22 or newer.
+As of 2026-08-31, production contains the accessible feedback UI, lazy-loaded client module, dependency-free Worker, D1 migration, rate-limit/D1 bindings, Worker and client tests, Wrangler commands, and ignored local secret/state paths. Local development requires Node.js 22 or newer.
 
 The account-pinned production D1 database and `bytlot.com`-restricted Turnstile widget were created on 2026-08-31. The remote migration ran before the first secret-created Worker version, the secret binding was stored outside Git, the public sitekey was installed, and the guarded Worker deployment plus representative rejection-path smoke tests passed. The environment still exposes no general authenticated Cloudflare/D1 connector for this GitHub Pages project; authenticated Wrangler is the retrieval fallback.
 
-The remaining release path is to commit and publish the reviewed static frontend, verify the live modal and calculator across target viewports, perform one controlled non-sensitive production submission, retrieve the row through the logging-disabled Wrangler fallback, and record only sanitized evidence.
+Release commit `94f30b4` was published by successful GitHub Pages run `33443458794`. The live modal, mobile bottom sheet, lazy Turnstile load, validation/focus flow, both calculator workflows, and responsive layout passed production smoke tests. A controlled non-sensitive submission was retrieved through the logging-disabled Wrangler fallback; only sanitized evidence was recorded, and the exact smoke row was removed without touching unrelated feedback.
 
 ## Work
 
@@ -42,8 +42,8 @@ The remaining release path is to commit and publish the reviewed static frontend
 - [x] Document current pricing, hard free-tier limits, privacy, retrieval, review cursor, sanitized snapshots, and raw-text handling.
 - [x] Complete independent design, security, and QA reviews and address findings.
 - [x] Authenticate Cloudflare, create/configure Turnstile, provision D1, apply migrations first, bind the secret, deploy the Worker route, and smoke-test backend rejection paths.
-- [ ] Publish and smoke-test the frontend, then complete the controlled production submission/retrieval round trip.
-- [ ] Move this plan to `../completed/` only after the production feedback submission and retrieval round trip succeeds.
+- [x] Publish and smoke-test the frontend, then complete the controlled production submission/retrieval round trip.
+- [x] Move this plan to `../completed/` only after the production feedback submission and retrieval round trip succeeds.
 
 ## Release gates
 
@@ -70,3 +70,12 @@ The remaining release path is to commit and publish the reviewed static frontend
 ## Cost boundary
 
 The expected incremental cost is `$0/month` only while account-wide Workers and D1 usage remains within current free hard limits. Traffic and current Cloudflare account consumption are unavailable, so this is an architecture range rather than a measured bill. Any paid-plan change requires measured pressure, an owner decision, and an updated decision record.
+
+## Completion evidence
+
+- Clean offline install: zero reported vulnerabilities.
+- `npm run check:release`: 89 tests, site validation, and Wrangler dry run passed.
+- GitHub Pages: release commit `94f30b4`, run `33443458794`, successful.
+- Production: representative API failures were generic and fail-closed; normal static routes remained available.
+- Browser: 390 px and 1440 px had no horizontal overflow, the feedback surface fit, both calculator workflows returned numeric results, and the console was clean. The full target-width and focus/error-state matrix passed locally before publication.
+- Data: the controlled D1 row was retrieved, reviewed, and removed by an exact predicate; unrelated feedback remained untouched and pending review.

@@ -10,7 +10,7 @@ Start here, then use the detailed documents below rather than relying on chat hi
 - Brand system and visual stewardship: [`docs/design/brand.md`](docs/design/brand.md)
 - Search discovery and SEO stewardship: [`docs/seo/README.md`](docs/seo/README.md)
 - Measurement and evidence: [`docs/analytics/`](docs/analytics/)
-- Anonymous-feedback implementation and provisioning status: [`docs/exec-plans/active/2026-08-31-user-feedback.md`](docs/exec-plans/active/2026-08-31-user-feedback.md)
+- Anonymous-feedback implementation and release record: [`docs/exec-plans/completed/2026-08-31-user-feedback.md`](docs/exec-plans/completed/2026-08-31-user-feedback.md)
 - Consequential choices: [`docs/decisions/`](docs/decisions/)
 
 ## Operating rules
