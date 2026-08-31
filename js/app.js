@@ -3,7 +3,7 @@ import {
   calculateCostPerMile,
   calculateOfferProfit,
   calculateShiftProfit
-} from "./calculations.js";
+} from "./calculations.js?v=20260831-perf";
 
 const STORAGE_KEY = "bytlot.driverProfit.assumptions.v1";
 const currencyFormatter = new Intl.NumberFormat("en-US", {

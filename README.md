@@ -6,7 +6,7 @@ BytLot is a static web product for turning an incomplete headline number into th
 
 Live product: [bytlot.com](https://bytlot.com/)
 
-The MVP uses vanilla HTML, CSS, and JavaScript on GitHub Pages. Calculations run in the browser; no user data is sent. Browser storage, if enabled, is limited to vehicle assumptions and a target hourly profit.
+The MVP uses vanilla HTML, CSS, and JavaScript on GitHub Pages. Calculations run in the browser; the application does not transmit calculator inputs. Browser storage, if enabled, is limited to vehicle assumptions and a target hourly profit.
 
 Project operating documentation starts in [`AGENTS.md`](AGENTS.md). Product scope is in [`docs/product/vision.md`](docs/product/vision.md), and the completed MVP plan is [`docs/exec-plans/completed/2026-08-28-driver-profit-mvp.md`](docs/exec-plans/completed/2026-08-28-driver-profit-mvp.md).
 

@@ -12,7 +12,7 @@ Production uses the custom-domain root, so application and icon URLs are root-ab
 
 ## Boundaries
 
-- No backend, accounts, subscriptions, database, runtime AI, analytics script, or external calculation API in the MVP.
+- No backend, accounts, subscriptions, database, runtime AI, application-owned analytics script, or external calculation API in the MVP. An automatically injected Cloudflare RUM beacon was observed on 2026-08-31 and remains an external control-plane cleanup item.
 - Inputs and calculations remain on the device. The only permitted browser persistence is `localStorage` for vehicle assumptions and target hourly profit.
 - Presentation code should not contain the authoritative formula logic. Formula behavior must be deterministic, documented, and testable.
 - The calculation model is platform-neutral: no provider-specific payout rules or default assumptions belong in the core.

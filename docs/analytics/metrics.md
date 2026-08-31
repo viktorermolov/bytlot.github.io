@@ -1,6 +1,6 @@
 # Metrics and evidence
 
-No product analytics instrumentation is active initially. No Cloudflare Analytics or Search Console dataset is connected to this workspace. Repository and public-page access do not supply product usage, index coverage, or search-query performance metrics.
+No product-event analytics instrumentation is present in the application. Cloudflare's automatic RUM beacon was observed in production on 2026-08-31, but no Cloudflare Analytics or Search Console dataset is connected to this workspace. Repository and public-page access therefore do not supply product usage, index coverage, or search-query performance metrics.
 
 ## What can answer which question
 

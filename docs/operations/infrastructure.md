@@ -18,7 +18,11 @@ The tracked production URLs assume the `bytlot.com` domain root. Repository-subp
 
 ## Limits and observed bottlenecks
 
-No traffic, search, or product-event data is accessible from this workspace. There is no observed technical bottleneck recorded yet. Browser-only persistence cannot provide accounts, synchronized history, secrets, payments, or trusted server-side processing.
+No traffic, search, or product-event dataset is accessible from this workspace. Browser-only persistence cannot provide accounts, synchronized history, secrets, payments, or trusted server-side processing.
+
+An Aug. 31, 2026 mobile PageSpeed lab run scored 99 with a 1.6 s LCP, 0 ms TBT, and 0.008 CLS. Its low-impact findings were a 4-hour browser TTL for first-party assets, one 4.7 KiB render-blocking stylesheet, a serial application-module import, and Cloudflare's automatically injected RUM beacon. The application now preloads its required calculation module and uses versioned URLs for the reported mutable assets. The stylesheet remains render-blocking because a critical-CSS split would duplicate most above-the-fold styles for an estimated 160 ms request.
+
+Browser-cache TTL and RUM injection are Cloudflare control-plane settings, not GitHub Pages repository settings. Keep HTML short-lived. Before increasing static-asset TTL, require versioned URLs and exclude HTML, `robots.txt`, and `sitemap.xml`. Disable automatic RUM unless the owner explicitly approves and documents client-side performance telemetry.
 
 ## Next plausible step
 

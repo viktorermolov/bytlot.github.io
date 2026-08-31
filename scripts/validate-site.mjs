@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "css/styles.css"), "utf8");
+const app = readFileSync(join(root, "js/app.js"), "utf8");
 const pageTitle = "Driver Profit Calculator for Delivery &amp; Gig Work | BytLot";
 const pageDescription = "Estimate delivery and gig-work profit after fuel or charging, maintenance, tires, depreciation, and other vehicle costs. Check a shift or compare an offer.";
 const socialTitle = "Driver Profit Calculator for Delivery &amp; Gig Work";
@@ -29,12 +30,21 @@ assert.match(html, /<h2 id="how-heading">How the estimate works\.<\/h2>/);
 assert.match(html, /then subtracts total miles × your editable vehicle cost per mile/);
 assert.match(html, /minimum payout combines that vehicle cost with your hourly target for the estimated time/);
 assert.match(html, /<link rel="icon" href="\/favicon_io\/favicon\.ico\?v=20260828-brand" sizes="16x16 32x32">/);
-assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/favicon_io\/bytlot-mark\.svg">/);
-assert.match(html, /<img class="brand-mark" src="\/favicon_io\/bytlot-mark\.svg" alt="" width="32" height="32">/);
+assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/favicon_io\/bytlot-mark\.svg\?v=20260828-brand">/);
+assert.match(html, /<img class="brand-mark" src="\/favicon_io\/bytlot-mark\.svg\?v=20260828-brand" alt="" width="32" height="32">/);
 assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260828-rhythm">/);
+assert.match(html, /<link rel="modulepreload" href="\/js\/calculations\.js\?v=20260831-perf">/);
+assert.match(html, /<script type="module" src="\/js\/app\.js\?v=20260831-perf"><\/script>/);
+assert.match(app, /from "\.\/calculations\.js\?v=20260831-perf";/);
+assert.ok(
+  html.indexOf('rel="modulepreload"') < html.indexOf('src="/js/app.js?v=20260831-perf"'),
+  "Calculation module preload must appear before the application module."
+);
 assert.match(html, />Charging loss estimate<\/label>/);
 assert.match(html, /aria-describedby="charging-loss-help"/);
 assert.match(html, />Energy lost between the outlet and battery\.<\/small>/);
+assert.match(html, /<p class="local-note"><span aria-hidden="true">●<\/span> Your calculator inputs stay on this device\.<\/p>/);
+assert.doesNotMatch(html, /Nothing is sent to BytLot/);
 assert.match(html, /<label class="field field--wide" for="miles-driven">/);
 assert.match(css, /--space-form-section: 22px;/);
 assert.match(css, /\.calculate-button \{[\s\S]*?margin-top: var\(--space-form-section\);/);
