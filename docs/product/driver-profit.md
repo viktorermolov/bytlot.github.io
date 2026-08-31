@@ -37,6 +37,10 @@ Keep full precision inside the engine and round only displayed currency/rates. Z
 
 The UI uses round, editable starter values to reduce first-use friction: gas at 25 MPG and $3.50/gal; EV at 3.5 mi/kWh, $0.18/kWh, and a 10% charging loss estimate; plus $0.10 maintenance, $0.03 tires, $0.15 depreciation, and $0.02 other per mile. Charging loss means energy lost between the outlet and battery. These are product defaults, not measured local prices, personalized estimates, tax rates, or claims about a typical driver. The interface labels them as starters and lets the user replace or zero every category.
 
+## User feedback
+
+Driver Profit provides a discreet footer entry for optional feedback about suggestions, bugs, and confusing behavior. Submitting feedback is an explicit action separate from calculation: calculator values, results, vehicle assumptions, and the saved target rate remain local and are not attached to the message. The accepted experience, context boundary, evidence limits, and non-goals are defined in [`feedback.md`](feedback.md).
+
 ## Non-goals
 
-Accounts, platform integrations, tax advice, trip tracking, payout guarantees, and server-side history are not MVP scope.
+Accounts, platform integrations, tax advice, trip tracking, payout guarantees, and server-side calculation history are not MVP scope.

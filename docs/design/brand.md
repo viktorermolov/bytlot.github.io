@@ -35,6 +35,17 @@ Use generous space, restrained rounding, strong hierarchy, thin borders, and min
 - Maintain 44 px minimum touch targets, visible keyboard focus, and meaning that does not rely on color alone.
 - Support 320 px and wider without horizontal scrolling. Check 320/390 px mobile, the 800 px layout boundary, and desktop before release.
 
+### Feedback entry and dialog
+
+- Feedback is a secondary product action. Place a discreet text-style `Feedback` button in the footer; do not add it to the calculator controls or compete with the primary calculation action.
+- Give the footer action the same 44 px minimum target and visible focus treatment as every other interactive control. It may look like a link, but it remains a button because it opens an interface instead of navigating.
+- Use the shared surface, line, ink, brand, signal, radius, spacing, and focus tokens for feedback. Do not introduce one-off colors, decorative icons, gradients, or a separate visual language.
+- Present feedback in a compact modal dialog on larger screens and the same component as a bottom sheet at 520 px and below. Keep it within the viewport, allow its contents to scroll, account for safe-area insets, and ensure the Turnstile control cannot create horizontal overflow at 320 px.
+- Keep the dialog title, visible text close control, fields, privacy helper, validation feedback, and primary action in a direct reading order. Labels remain above controls and helper/error text must be programmatically associated with its field.
+- Opening the dialog moves focus to its title, keeps keyboard focus inside while open, and makes the page behind it unavailable. Escape and the visible close control dismiss it; closing returns focus to the footer trigger. Do not dismiss on an accidental backdrop click when a draft may be present.
+- On submission, focus the first invalid field, announce request errors without removing the draft, prevent duplicate sends while pending, and move focus to the confirmation heading after success. Preserve a draft only in the current page session; do not put feedback text in browser storage.
+- The mobile and desktop versions are one responsive component with the same semantics and content. Avoid motion that is necessary to understand state, and honor reduced-motion preferences if motion is added later.
+
 ## Design-steward workflow
 
 For meaningful user-facing changes, explicitly assign a design-steward reviewer. The reviewer should:

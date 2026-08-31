@@ -30,9 +30,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png?v=20260828-brand">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png?v=20260828-brand">
     <link rel="manifest" href="/favicon_io/site.webmanifest?v=20260828-brand">
-    <link rel="stylesheet" href="/css/styles.css?v=20260828-rhythm">
+    <link rel="stylesheet" href="/css/styles.css?v=20260831-feedback">
     <link rel="modulepreload" href="/js/calculations.js?v=20260831-perf">
-    <script type="module" src="/js/app.js?v=20260831-perf"></script>
+    <script type="module" src="/js/app.js?v=20260831-feedback"></script>
 
     <script type="application/ld+json">
       {
@@ -240,8 +240,66 @@
     </main>
 
     <footer class="site-footer">
-      <div><strong>BytLot</strong><span>Know the real number.</span></div>
-      <p>Driver Profit provides editable estimates—not tax, legal, or financial advice.</p>
+      <div class="site-footer__brand"><strong>BytLot</strong><span>Know the real number.</span></div>
+      <div class="site-footer__actions">
+        <p>Driver Profit provides editable estimates—not tax, legal, or financial advice.</p>
+        <button id="feedback-open" class="footer-feedback-button" type="button" aria-haspopup="dialog" aria-controls="feedback-dialog">Feedback</button>
+        <p id="feedback-load-error" class="footer-feedback-error" role="status" hidden>Feedback is temporarily unavailable. Please try again.</p>
+      </div>
     </footer>
+
+    <dialog id="feedback-dialog" class="feedback-dialog" aria-labelledby="feedback-title" data-turnstile-sitekey="0x4AAAAAAEjSYdC4ZDUgLaHD">
+      <div class="feedback-dialog__surface">
+        <div class="feedback-dialog__header">
+          <div>
+            <p class="eyebrow">Your perspective matters</p>
+            <h2 id="feedback-title" tabindex="-1">Help improve BytLot</h2>
+          </div>
+          <button id="feedback-close" class="feedback-close-button" type="button">Close</button>
+        </div>
+
+        <div id="feedback-form-view">
+          <p class="feedback-intro">Found a bug, something confusing, or have an idea? Let us know.</p>
+          <form id="feedback-form" novalidate>
+            <label class="feedback-field" for="feedback-type">
+              <span>Feedback type</span>
+              <select id="feedback-type" name="feedbackType" required>
+                <option value="">Choose one</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="bug">Bug</option>
+                <option value="confusing">Confusing / unclear</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+
+            <label class="feedback-field" for="feedback-message">
+              <span>Message</span>
+              <textarea id="feedback-message" name="message" rows="6" aria-describedby="feedback-message-help feedback-character-count" required></textarea>
+            </label>
+            <div class="feedback-message-meta">
+              <small id="feedback-message-help">10–2,000 characters.</small>
+              <small id="feedback-character-count">0 / 2,000</small>
+            </div>
+
+            <p class="feedback-privacy">No email or account needed. We store your message and basic page context—not your calculator values. Please don’t include personal information. Cloudflare Turnstile helps protect this form from abuse.</p>
+
+            <div class="feedback-verification">
+              <div id="feedback-turnstile"></div>
+              <p id="feedback-verification-status" class="feedback-verification-status" role="status">Verification loads when this form opens.</p>
+            </div>
+
+            <p id="feedback-error" class="feedback-error" role="alert" tabindex="-1" hidden></p>
+            <button id="feedback-submit" class="feedback-submit-button" type="submit">Send feedback</button>
+          </form>
+        </div>
+
+        <section id="feedback-success" class="feedback-success" aria-labelledby="feedback-success-title" hidden>
+          <p class="eyebrow">Received</p>
+          <h2 id="feedback-success-title" tabindex="-1">Thanks — your feedback was received.</h2>
+          <p>We’ll review it as we improve BytLot.</p>
+          <button id="feedback-done" class="feedback-submit-button" type="button">Done</button>
+        </section>
+      </div>
+    </dialog>
   </body>
 </html>

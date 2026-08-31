@@ -5,10 +5,23 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "check": "npm test && node scripts/validate-site.mjs",
-    "serve": "python3 -m http.server 4173"
+    "check": "npm test && node scripts/validate-site.mjs && npm run worker:check",
+    "check:release": "npm run check && node scripts/validate-release.mjs",
+    "serve": "python3 -m http.server 4173",
+    "worker:check": "node --check worker/src/index.js && WRANGLER_LOG_PATH=.wrangler/logs/wrangler.log WRANGLER_SEND_METRICS=false wrangler deploy --dry-run --config worker/wrangler.jsonc --outdir .tmp/wrangler-dry-run",
+    "feedback:db:local": "WRANGLER_LOG_PATH=.wrangler/logs/wrangler.log WRANGLER_SEND_METRICS=false wrangler d1 migrations apply bytlot-feedback --local --config worker/wrangler.local.jsonc",
+    "feedback:dev": "WRANGLER_LOG_PATH=.wrangler/logs/wrangler.log WRANGLER_SEND_METRICS=false wrangler dev --local --assets . --ip 127.0.0.1 --port 4173 --config worker/wrangler.local.jsonc --log-level warn --show-interactive-dev-session false",
+    "feedback:deploy:preflight": "node scripts/deploy-feedback.mjs --preflight",
+    "feedback:deploy:bootstrap": "npm run check:release && node scripts/deploy-feedback.mjs --bootstrap-database",
+    "feedback:deploy:verify": "node scripts/deploy-feedback.mjs --verify-remote",
+    "feedback:deploy": "npm run check:release && node scripts/deploy-feedback.mjs --deploy-worker",
+    "feedback:fetch": "node scripts/fetch-feedback.mjs",
+    "feedback:mark-reviewed": "node scripts/mark-feedback-reviewed.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "wrangler": "^4.127.1"
   }
 }

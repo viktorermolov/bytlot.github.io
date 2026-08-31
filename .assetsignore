@@ -1,0 +1,11 @@
+.*
+AGENTS.md
+ARCHITECTURE.md
+CNAME
+README.md
+docs/
+node_modules/
+package*.json
+scripts/
+tests/
+worker/

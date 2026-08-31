@@ -415,6 +415,29 @@ document.querySelector("#reset-assumptions").addEventListener("click", () => {
   markResultsStale();
 });
 
+const feedbackTrigger = document.querySelector("#feedback-open");
+const feedbackLoadError = document.querySelector("#feedback-load-error");
+let feedbackControllerPromise;
+
+feedbackTrigger.addEventListener("click", async () => {
+  feedbackLoadError.hidden = true;
+  feedbackTrigger.disabled = true;
+  feedbackTrigger.setAttribute("aria-busy", "true");
+
+  try {
+    feedbackControllerPromise ||= import("./feedback.js?v=20260831-feedback")
+      .then(({ createFeedbackController }) => createFeedbackController());
+    const controller = await feedbackControllerPromise;
+    controller.open(feedbackTrigger);
+  } catch {
+    feedbackControllerPromise = undefined;
+    feedbackLoadError.hidden = false;
+  } finally {
+    feedbackTrigger.disabled = false;
+    feedbackTrigger.removeAttribute("aria-busy");
+  }
+});
+
 restoreSettings();
 updateVehicleFields();
 updateAssumptionsSummary();
