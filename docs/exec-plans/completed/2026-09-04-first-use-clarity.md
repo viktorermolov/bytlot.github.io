@@ -1,6 +1,6 @@
 # Driver Profit — first-use clarity
 
-Started and implementation completed: 2026-09-04. Status: locally verified, not published.
+Started, implemented and published: 2026-09-04. Status: production verified.
 
 ## Scope
 
@@ -28,7 +28,7 @@ Keep the calculation formulas, public canonical URL, platform-neutral model, fee
 
 ## Evidence dependencies
 
-No callable Search Console connector is available, but the owner signed into Search Console in the browser. The resulting [dated snapshot](../../analytics/snapshots/2026-09-04-search-console.md) confirms existing homepage indexation, the canonical and successful sitemap; the available performance period has zero impressions/clicks. No additional SEO page or new indexing request is included in this implementation.
+No callable Search Console connector is available, but the owner signed into Search Console in the browser. The resulting [dated snapshot](../../analytics/snapshots/2026-09-04-search-console.md) confirms existing homepage indexation, the canonical and successful sitemap; the available performance period has zero impressions/clicks. No additional SEO page is included in this implementation. One homepage recrawl request was accepted after publication.
 
 ## Progress
 
@@ -42,6 +42,12 @@ No callable Search Console connector is available, but the owner signed into Sea
 - Example navigation preserved entered values/current same-mode result and returned focus to the first field. Real keyboard input changed the vehicle label to unsaved, blur saved it, and reload restored it. Reverting a custom saved value to a starter remained unsaved until saved. Shift/offer payouts did not survive reload. Malformed/unavailable storage behavior is covered by unit tests, not a claim of browser permission testing.
 - Static examples and result states were visually inspected on mobile and desktop; browser console showed no warnings/errors. SEO-specialist, design-steward and Sol code reviews found no remaining blocking issue after corrections.
 
-## Publication handoff
+## Publication and production verification
 
-This record completes implementation/local verification only. No GitHub push, GitHub Pages publication, Worker deployment, Cloudflare setting change or indexing request was performed. Before publishing, use the existing release checklist, then verify the public version and record its actual commit/deployment evidence. Search Console already has the sitemap; request a recrawl of the updated homepage after a substantive publication if appropriate. Do not mark production verification complete from these local checks.
+The owner explicitly authorized production publication after the first-stage checks passed. Application commit `8277aa605545a226289f7efd49fb936791d9cca2` was pushed to `master`; GitHub Pages run `33913694077` succeeded. `npm run check:release` passed all 95 tests, site validation, Worker dry run and production configuration validation. The staged secret-pattern scan and final independent review passed. Pre-existing feedback review files were excluded.
+
+Production served the new copy/examples and exact release CSS, application/settings/calculation modules, robots and sitemap with `200`. HTTP and HTTPS `www` returned `301` to the canonical HTTPS homepage. The only HTML difference from the committed source was the previously documented Cloudflare RUM injection; no edge setting or Worker was changed.
+
+With the existing saved EV assumptions, a $120 gross / 5-hour / 80-mile shift returned $103.00 profit; a $30 / 60-minute / 25-mile offer returned $24.69/hr and a $30.32 minimum for the existing $25/hr target. A $40 offer showed Meets your target; editing hid the stale verdict. Production checks at 320/390/800/801/1440 px, with collapsed and expanded settings, had no horizontal overflow. Example navigation preserved entered data/results and focused the first field; keyboard mode navigation passed. Reload restored vehicle assumptions/target without preserving payouts. Console warnings/errors were absent. Vehicle settings were not changed during the production smoke test.
+
+Search Console accepted one request for `https://bytlot.com/` after publication and showed **Indexing requested**, with the URL added to its priority crawl queue. This confirms the request, not completion of the new crawl or a ranking change. See the [deployment record](../../operations/deployments.md) and [release checklist](../../operations/release-checklist.md).

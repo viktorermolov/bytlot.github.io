@@ -42,3 +42,7 @@ The overview's aggregate Indexing section was still processing data, and no expe
 Google has discovered and indexed the canonical homepage. The observed search report contains no impressions/clicks yet; it does not prove future lack of demand, a ranking penalty, or a calculator usability problem. No product-event, retention, Cloudflare traffic or billing evidence was supplied.
 
 Proceed with the bounded first-use improvement. After publication, inspect the new public version and request recrawl once if appropriate. Compare later available periods with this actual date range; use full 28-day windows only when enough history exists. Keep content expansion to the roadmap's one useful pilot until query or user-need evidence supports more pages.
+
+## Post-publication action — 2026-09-04
+
+After application commit `8277aa6` was published and production verified, one indexing request for `https://bytlot.com/` completed its live eligibility check. Search Console displayed **Indexing requested** and confirmed addition to a priority crawl queue. No duplicate request or sitemap resubmission was made. This is operational evidence that Google accepted the request; the baseline metrics and prior crawl timestamp above remain unchanged observations, not post-release search results.

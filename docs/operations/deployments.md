@@ -55,3 +55,18 @@ No post-release PageSpeed score is claimed: a score is a sampled laboratory resu
 - **Release checks:** a clean offline install reported zero vulnerabilities; all 89 automated tests, site validation, Wrangler dry run, JavaScript syntax, secret/former-entity scans, and Git whitespace checks passed; independent post-fix review found no P0–P2 findings
 
 Cloudflare plan and aggregate account usage were not inspected. The feature's incremental-cost estimate remains conditionally `$0/month` only while the account stays within the documented Workers, D1, and Turnstile Free boundaries.
+
+## 2026-09-04 — First-use clarity
+
+- **Application release commit:** [`8277aa6`](https://github.com/viktorermolov/bytlot.github.io/commit/8277aa605545a226289f7efd49fb936791d9cca2)
+- **GitHub Pages run:** [`33913694077`](https://github.com/viktorermolov/bytlot.github.io/actions/runs/33913694077), completed successfully
+- **Source and target:** `master`, repository root, [https://bytlot.com/](https://bytlot.com/); owner explicitly authorized publication after successful first-stage checks
+- **Changes:** compact mobile entry, clear Shift/Offer descriptions, truthful starter/saved/unsaved assumptions, two static worked examples, and a target-comparison verdict using the existing formulas
+- **Release gate:** `npm run check:release` passed all 95 tests, site validation, Worker dry run and release validation; syntax, whitespace, staged secret-pattern scan, design/SEO review and final independent review passed
+- **Delivery:** homepage and required release assets returned `200`; CSS, application/settings/calculation modules, robots and sitemap matched local files exactly. The HTML contained the new examples/copy and correct canonical; its only source difference was the previously documented Cloudflare RUM injection. HTTP and HTTPS `www` returned `301` to `https://bytlot.com/`.
+- **Production calculations:** existing saved EV assumptions were preserved. A $120 gross / 5-hour / 80-mile shift returned $103.00 profit. A $30 / 60-minute / 25-mile offer returned $24.69/hr, a $30.32 required payout and Below your target at the existing $25/hr target; a $40 offer returned $34.69/hr and Meets your target.
+- **Browser checks:** collapsed/expanded settings at 320/390/800/801/1440 px had no horizontal overflow; examples preserved inputs and current same-mode result, return links focused the first input, keyboard tabs worked, and input edits hid the stale verdict. Reload restored vehicle assumptions/target but no payouts; console warnings/errors were absent.
+- **Search Console:** one post-publication homepage request showed **Indexing requested** and confirmed the priority crawl queue. The existing successful sitemap was not resubmitted. Accepted submission does not establish a completed new crawl, rankings or traffic impact.
+- **Privacy and cost:** no new dependency, service, analytics, formula, feedback payload, Worker deployment or Cloudflare setting change. Existing feedback review files were excluded. No production feedback submission was needed for this unchanged feature.
+
+The [completed plan](../exec-plans/completed/2026-09-04-first-use-clarity.md) records detailed scope and local verification. The [dated Search Console snapshot](../analytics/snapshots/2026-09-04-search-console.md) is a pre-release search baseline plus the separately labeled post-release submission outcome.
