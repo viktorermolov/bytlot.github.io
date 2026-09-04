@@ -30,9 +30,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png?v=20260828-brand">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png?v=20260828-brand">
     <link rel="manifest" href="/favicon_io/site.webmanifest?v=20260828-brand">
-    <link rel="stylesheet" href="/css/styles.css?v=20260831-feedback">
+    <link rel="stylesheet" href="/css/styles.css?v=20260904-clarity">
     <link rel="modulepreload" href="/js/calculations.js?v=20260831-perf">
-    <script type="module" src="/js/app.js?v=20260831-feedback"></script>
+    <link rel="modulepreload" href="/js/settings.js?v=20260904-clarity">
+    <script type="module" src="/js/app.js?v=20260904-clarity"></script>
 
     <script type="application/ld+json">
       {
@@ -77,8 +78,8 @@
       <section class="intro" aria-labelledby="page-title">
         <p class="eyebrow">Know the real number.</p>
         <h1 id="page-title">Driver profit calculator.</h1>
-        <p class="lede">Estimate what you really earned after fuel or charging, maintenance, tires, depreciation, and other vehicle costs.</p>
-        <p class="platform-note">For delivery and gig work—using your numbers, not a universal dollars-per-mile rule.</p>
+        <p class="lede">Estimate shift profit or check an offer after vehicle costs.</p>
+        <p class="platform-note">For delivery and gig work · Gas and EV</p>
       </section>
 
       <div class="calculator-layout">
@@ -93,8 +94,8 @@
           <details id="vehicle-assumptions" class="assumptions-card assumptions-card--shared">
             <summary>
               <span>
-                <strong>Vehicle assumptions</strong>
-                <small id="assumptions-summary">Gas · 25 MPG · $3.50/gal · estimating cost…</small>
+                <strong id="assumptions-state">Starter assumptions</strong>
+                <small id="assumptions-summary">Gas · $0.44/mi estimated</small>
               </span>
               <span class="edit-label">Adjust</span>
             </summary>
@@ -103,7 +104,7 @@
               <div class="assumptions-title-row">
                 <div>
                   <h3>Use costs that fit your vehicle</h3>
-                  <p>Starter estimates are editable—not current local prices or tax rates.</p>
+                  <p id="assumptions-help">Starter estimates are editable—not current local prices or tax rates.</p>
                 </div>
                 <button id="reset-assumptions" class="text-button" type="button">Reset</button>
               </div>
@@ -145,11 +146,11 @@
               <div class="section-heading">
                 <div>
                   <p class="step-label">Completed shift</p>
-                  <h2>What did I really earn?</h2>
+                  <h2>What did I earn?</h2>
                 </div>
                 <span class="estimate-badge">Estimate</span>
               </div>
-              <p class="form-intro">Enter base platform pay separately from tips and bonuses so nothing is counted twice.</p>
+              <p class="form-intro">Base payout excludes tips and bonuses.</p>
               <div class="field-grid">
                 <label class="field" for="base-pay"><span>Base payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="base-pay" name="basePay" type="number" inputmode="decimal" min="0" step="any" placeholder="120.00" required></span></label>
                 <label class="field" for="tips"><span>Tips</span><span class="input-wrap"><span class="input-prefix">$</span><input id="tips" name="tips" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
@@ -159,6 +160,7 @@
               </div>
               <p id="shift-error" class="form-error" role="alert" hidden></p>
               <button class="calculate-button" type="submit">Calculate my real profit</button>
+              <a class="example-link" href="#example-shift">See an example shift</a>
             </form>
           </div>
 
@@ -167,11 +169,11 @@
               <div class="section-heading">
                 <div>
                   <p class="step-label">Before you accept</p>
-                  <h2>Does this offer meet my target?</h2>
+                  <h2>Does it meet my target?</h2>
                 </div>
                 <span class="estimate-badge">Estimate</span>
               </div>
-              <p class="form-intro">Include realistic wait, pickup, drop-off, and return time. Return miles mean miles not already counted.</p>
+              <p class="form-intro">Include wait, pickup, drop-off and return time. Add only extra return miles.</p>
               <div class="field-grid">
                 <label class="field" for="offer-payout"><span>Expected total payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="offer-payout" name="offeredPayout" type="number" inputmode="decimal" min="0" step="any" placeholder="24.00" required></span></label>
                 <label class="field" for="offer-minutes"><span>Estimated total time</span><span class="input-wrap"><input id="offer-minutes" name="estimatedMinutes" type="number" inputmode="decimal" min="1" step="any" placeholder="45" required><span class="input-suffix">min</span></span></label>
@@ -181,6 +183,7 @@
               </div>
               <p id="offer-error" class="form-error" role="alert" hidden></p>
               <button class="calculate-button" type="submit">Check this offer</button>
+              <a class="example-link" href="#example-offer">See an example offer</a>
             </form>
           </div>
         </section>
@@ -188,6 +191,7 @@
         <aside id="results" class="results-panel" aria-labelledby="results-title" aria-live="polite">
           <p class="eyebrow">Your real number</p>
           <h2 id="results-title">Estimated real profit</h2>
+          <p id="offer-verdict" class="offer-verdict" hidden></p>
           <p id="primary-result" class="primary-result" aria-label="No result yet">—</p>
           <p id="result-support" class="result-support">Enter your details to see what remains after estimated vehicle costs.</p>
 
@@ -223,6 +227,43 @@
           <li><span>02</span><strong>Price the miles</strong><p>Estimate energy, upkeep, tires, depreciation, and other costs.</p></li>
           <li><span>03</span><strong>See what remains</strong><p>Compare estimated profit with your own hourly target.</p></li>
         </ol>
+      </section>
+
+      <section id="worked-examples" class="examples-section" aria-labelledby="examples-heading">
+        <div class="section-copy">
+          <p class="eyebrow">Illustrations, step by step</p>
+          <h2 id="examples-heading">Worked examples</h2>
+          <p>These examples use their own fixed inputs. Your entries and saved vehicle assumptions stay as they are.</p>
+        </div>
+        <p class="example-basis">Both use the gas starter assumptions: 25 MPG, $3.50/gal, plus $0.10 maintenance, $0.03 tires, $0.15 depreciation and $0.02 other per mile. Total: <strong>$0.44/mi</strong>. These are illustrative estimates, not local averages or recommendations.</p>
+        <div class="example-list">
+          <article id="example-shift" class="worked-example" tabindex="-1" aria-labelledby="example-shift-title">
+            <p class="step-label">Example · completed shift</p>
+            <h3 id="example-shift-title">What remains from $120?</h3>
+            <p>$100 base payout + $20 tips + $0 bonuses, over 5 hours and 80 total miles.</p>
+            <dl>
+              <div><dt>Vehicle cost: 80 mi × $0.44</dt><dd>$35.20</dd></div>
+              <div><dt>Estimated profit: $120 − $35.20</dt><dd>$84.80</dd></div>
+              <div><dt>Estimated profit per hour</dt><dd>$16.96/hr</dd></div>
+            </dl>
+            <p class="example-conclusion">The gross rate is $24/hr. After estimated vehicle costs, $16.96/hr remains before taxes.</p>
+            <a class="example-link" href="#shift-tab" data-start-mode="shift">Check my own shift</a>
+          </article>
+          <article id="example-offer" class="worked-example" tabindex="-1" aria-labelledby="example-offer-title">
+            <p class="step-label">Example · before accepting</p>
+            <h3 id="example-offer-title">Does a $24 offer meet the target?</h3>
+            <p>45 minutes including waiting and return time, 18 work miles + 4 extra return miles, and a $22/hr profit target.</p>
+            <dl>
+              <div><dt>Vehicle cost: 22 mi × $0.44</dt><dd>$9.68</dd></div>
+              <div><dt>Estimated profit: $24 − $9.68</dt><dd>$14.32</dd></div>
+              <div><dt>Estimated profit per hour</dt><dd>$19.09/hr</dd></div>
+              <div><dt>Minimum payout: $9.68 + $22 × 0.75 hr</dt><dd>$26.18</dd></div>
+            </dl>
+            <p class="example-conclusion">This offer is $2.18 below the payout needed for this target. A different vehicle cost, time or target changes the answer.</p>
+            <a class="example-link" href="#offer-tab" data-start-mode="offer">Check my own offer</a>
+          </article>
+        </div>
+        <p class="example-footnote">Pre-tax estimates. Tolls, parking and fixed business expenses are excluded, as in the calculator.</p>
       </section>
 
       <section class="faq-section" aria-labelledby="faq-heading">

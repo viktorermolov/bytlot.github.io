@@ -37,6 +37,12 @@ Keep full precision inside the engine and round only displayed currency/rates. Z
 
 The UI uses round, editable starter values to reduce first-use friction: gas at 25 MPG and $3.50/gal; EV at 3.5 mi/kWh, $0.18/kWh, and a 10% charging loss estimate; plus $0.10 maintenance, $0.03 tires, $0.15 depreciation, and $0.02 other per mile. Charging loss means energy lost between the outlet and battery. These are product defaults, not measured local prices, personalized estimates, tax rates, or claims about a typical driver. The interface labels them as starters and lets the user replace or zero every category.
 
+## First-use clarity
+
+The shared vehicle disclosure distinguishes editable starter assumptions, settings successfully saved in this browser, and unsaved edits. Invalid or malformed saved fields fall back to the documented starters; unknown fields are ignored. Only the existing vehicle assumptions and target are persisted, using the existing storage key. The label describes the active vehicle assumptions, not the target or calculation inputs.
+
+Two static worked examples show a completed shift and an offer using explicit gas starter inputs. They never populate or overwrite calculator fields, change saved assumptions, or replace the current result. Their displayed arithmetic is checked against the calculation engine. Offer Check emphasizes the existing target comparison in text, and hides that verdict when inputs change until a fresh calculation is made.
+
 ## User feedback
 
 Driver Profit provides a discreet footer entry for optional feedback about suggestions, bugs, and confusing behavior. Submitting feedback is an explicit action separate from calculation: calculator values, results, vehicle assumptions, and the saved target rate remain local and are not attached to the message. The accepted experience, context boundary, evidence limits, and non-goals are defined in [`feedback.md`](feedback.md).

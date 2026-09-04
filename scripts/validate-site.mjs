@@ -7,6 +7,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "css/styles.css"), "utf8");
 const app = readFileSync(join(root, "js/app.js"), "utf8");
+const settings = readFileSync(join(root, "js/settings.js"), "utf8");
 const feedback = readFileSync(join(root, "js/feedback.js"), "utf8");
 const worker = readFileSync(join(root, "worker/src/index.js"), "utf8");
 const workerConfig = readFileSync(join(root, "worker/wrangler.jsonc"), "utf8");
@@ -37,12 +38,15 @@ assert.match(html, /minimum payout combines that vehicle cost with your hourly t
 assert.match(html, /<link rel="icon" href="\/favicon_io\/favicon\.ico\?v=20260828-brand" sizes="16x16 32x32">/);
 assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/favicon_io\/bytlot-mark\.svg\?v=20260828-brand">/);
 assert.match(html, /<img class="brand-mark" src="\/favicon_io\/bytlot-mark\.svg\?v=20260828-brand" alt="" width="32" height="32">/);
-assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260831-feedback">/);
+assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260904-clarity">/);
 assert.match(html, /<link rel="modulepreload" href="\/js\/calculations\.js\?v=20260831-perf">/);
-assert.match(html, /<script type="module" src="\/js\/app\.js\?v=20260831-feedback"><\/script>/);
+assert.match(html, /<script type="module" src="\/js\/app\.js\?v=20260904-clarity"><\/script>/);
 assert.match(app, /from "\.\/calculations\.js\?v=20260831-perf";/);
+assert.match(settings, /from "\.\/calculations\.js\?v=20260831-perf";/);
+assert.match(html, /<link rel="modulepreload" href="\/js\/settings\.js\?v=20260904-clarity">/);
+assert.match(app, /from "\.\/settings\.js\?v=20260904-clarity";/);
 assert.ok(
-  html.indexOf('rel="modulepreload"') < html.indexOf('src="/js/app.js?v=20260831-feedback"'),
+  html.indexOf('rel="modulepreload"') < html.indexOf('src="/js/app.js?v=20260904-clarity"'),
   "Calculation module preload must appear before the application module."
 );
 assert.match(html, />Charging loss estimate<\/label>/);

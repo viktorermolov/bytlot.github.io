@@ -4,8 +4,8 @@ import {
   calculateOfferProfit,
   calculateShiftProfit
 } from "./calculations.js?v=20260831-perf";
+import { readSettings, writeSettings, assumptionState } from "./settings.js?v=20260904-clarity";
 
-const STORAGE_KEY = "bytlot.driverProfit.assumptions.v1";
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -26,6 +26,8 @@ const tabs = [...document.querySelectorAll("[data-mode]")];
 const panels = [...document.querySelectorAll("[data-panel]")];
 const assumptionsDetails = document.querySelector("#vehicle-assumptions");
 const assumptionsSummary = document.querySelector("#assumptions-summary");
+const assumptionsState = document.querySelector("#assumptions-state");
+const assumptionsHelp = document.querySelector("#assumptions-help");
 const gasFields = document.querySelector("#gas-fields");
 const evFields = document.querySelector("#ev-fields");
 const resultsPanel = document.querySelector("#results");
@@ -34,9 +36,12 @@ const primaryResult = document.querySelector("#primary-result");
 const resultSupport = document.querySelector("#result-support");
 const resultList = document.querySelector("#result-list");
 const breakdown = document.querySelector("#breakdown");
+const offerVerdict = document.querySelector("#offer-verdict");
 
 let activeMode = "shift";
 let hasResult = false;
+let persistedSettings = null;
+let settingsWriteFailed = false;
 
 function inputNumber(id) {
   const value = document.querySelector(`#${id}`).value.trim();
@@ -102,12 +107,19 @@ function settingsSnapshot() {
   };
 }
 
-function saveSettings() {
+function browserStorage() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settingsSnapshot()));
+    return window.localStorage;
   } catch {
-    // Storage may be unavailable in private or restricted browser contexts.
+    return null;
   }
+}
+
+function saveSettings() {
+  const snapshot = settingsSnapshot();
+  settingsWriteFailed = !writeSettings(browserStorage(), snapshot);
+  if (!settingsWriteFailed) persistedSettings = snapshot;
+  updateAssumptionsSummary();
 }
 
 function setInputValue(id, value) {
@@ -117,14 +129,8 @@ function setInputValue(id, value) {
 }
 
 function restoreSettings() {
-  let saved = {};
-  try {
-    saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-  } catch {
-    saved = {};
-  }
-
-  const values = { ...DEFAULT_ASSUMPTIONS, ...saved };
+  const { settings: values, persisted } = readSettings(browserStorage());
+  persistedSettings = persisted;
   const type = values.vehicleType === "ev" ? "ev" : "gas";
   document.querySelector(`input[name='vehicle-type'][value='${type}']`).checked = true;
   setInputValue("mpg", values.mpg);
@@ -149,22 +155,31 @@ function updateVehicleFields() {
 }
 
 function updateAssumptionsSummary() {
+  const state = assumptionState(settingsSnapshot(), persistedSettings);
+  assumptionsState.textContent = {
+    starter: "Starter assumptions",
+    saved: "Saved on this device",
+    unsaved: "Unsaved vehicle edits"
+  }[state];
+  assumptionsHelp.textContent = {
+    starter: "Starter estimates are editable—not current local prices or tax rates.",
+    saved: "These vehicle assumptions are saved in this browser. Reset restores the starter values and hourly target.",
+    unsaved: settingsWriteFailed
+      ? "These vehicle edits could not be saved. They stay in this page."
+      : "Your vehicle edits have not been saved yet."
+  }[state];
   try {
     const vehicle = vehicleFromInputs();
     const rates = calculateCostPerMile(vehicle);
-    if (vehicle.type === "gas") {
-      assumptionsSummary.textContent = `Gas · ${decimalFormatter.format(vehicle.efficiency)} MPG · ${estimatedCost(vehicle.energyPrice)}/gal · ${estimatedCost(rates.totalCostPerMile)}/mi estimated`;
-    } else {
-      const unit = vehicle.efficiencyUnit === "kwhPer100Mi" ? "kWh/100 mi" : "mi/kWh";
-      assumptionsSummary.textContent = `EV · ${decimalFormatter.format(vehicle.efficiency)} ${unit} · ${estimatedCost(vehicle.energyPrice)}/kWh · ${estimatedCost(rates.totalCostPerMile)}/mi estimated`;
-    }
+    assumptionsSummary.textContent = `${vehicle.type === "gas" ? "Gas" : "EV"} · ${estimatedCost(rates.totalCostPerMile)}/mi estimated`;
   } catch {
-    assumptionsSummary.textContent = "Review the highlighted vehicle assumptions";
+    assumptionsSummary.textContent = "Adjust vehicle costs to complete the estimate";
   }
 }
 
 function clearResults() {
   hasResult = false;
+  offerVerdict.hidden = true;
   resultsPanel.classList.remove("is-negative", "is-stale");
   resultsTitle.textContent = activeMode === "shift"
     ? "Estimated real profit"
@@ -239,6 +254,7 @@ function completeResult(result) {
 }
 
 function renderShift(result) {
+  offerVerdict.hidden = true;
   resultsTitle.textContent = "Estimated real profit";
   primaryResult.textContent = currency(result.estimatedProfit);
 
@@ -261,6 +277,9 @@ function renderShift(result) {
 }
 
 function renderOffer(result, targetHourlyProfit) {
+  offerVerdict.textContent = result.meetsTarget ? "Meets your target" : "Below your target";
+  offerVerdict.classList.toggle("is-met", result.meetsTarget);
+  offerVerdict.hidden = false;
   resultsTitle.textContent = "Expected real profit / hour";
   primaryResult.textContent = `${currency(result.profitPerHour)}/hr`;
   const difference = Math.abs(result.offerDifference);
@@ -285,6 +304,7 @@ function renderOffer(result, targetHourlyProfit) {
 
 function markResultsStale() {
   if (!hasResult) return;
+  offerVerdict.hidden = true;
   resultsPanel.classList.add("is-stale");
   resultSupport.textContent = "Inputs changed. Recalculate to refresh this estimate.";
 }
@@ -372,6 +392,16 @@ tabs.forEach((tab) => {
   });
 });
 
+document.querySelectorAll("[data-start-mode]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const mode = link.dataset.startMode;
+    if (activeMode !== mode) setMode(mode);
+    document.querySelector(".input-panel").scrollIntoView({ block: "start" });
+    document.querySelector(mode === "shift" ? "#base-pay" : "#offer-payout").focus({ preventScroll: true });
+  });
+});
+
 document.querySelectorAll("input[name='vehicle-type']").forEach((input) => {
   input.addEventListener("change", () => {
     updateVehicleFields();
@@ -383,6 +413,7 @@ document.querySelectorAll("input[name='vehicle-type']").forEach((input) => {
 
 document.querySelectorAll("#vehicle-assumptions input, #vehicle-assumptions select").forEach((input) => {
   input.addEventListener("input", () => {
+    settingsWriteFailed = false;
     updateAssumptionsSummary();
     markResultsStale();
   });

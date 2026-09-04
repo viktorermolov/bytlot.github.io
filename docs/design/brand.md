@@ -46,6 +46,13 @@ Use generous space, restrained rounding, strong hierarchy, thin borders, and min
 - On submission, focus the first invalid field, announce request errors without removing the draft, prevent duplicate sends while pending, and move focus to the confirmation heading after success. Preserve a draft only in the current page session; do not put feedback text in browser storage.
 - The mobile and desktop versions are one responsive component with the same semantics and content. Avoid motion that is necessary to understand state, and honor reduced-motion preferences if motion is added later.
 
+## First-use patterns — 2026-09-04
+
+- Keep the two existing workflows visible in the opening copy and tab bar. At 520 px and below, compact introductory/form spacing and omit the redundant in-form step label and estimate badge; retain the tab labels, primary H1/H2, input labels, and full-size controls. Desktop retains the fuller context.
+- The shared vehicle disclosure shows a short gas/EV cost-per-mile summary plus a truthful state label: `Starter assumptions`, `Saved on this device`, or `Unsaved vehicle edits`. A failed write must not be described as saved; editing a custom saved profile back to starter values stays unsaved until the write succeeds.
+- Worked examples are static, clearly illustrative articles below the main calculator and methodology, using borders and existing text tokens. Under-form text links lead to examples; their return links focus the appropriate first input. Examples never replace visitor values, saved settings or the current result.
+- Offer Check may emphasize its existing target verdict in a compact textual badge. `Meets your target` uses the signal accent; `Below your target` uses a restrained outline. Hide the verdict when the inputs become stale or outside the offer result; do not imply an unconditional accept/decline recommendation.
+
 ## Design-steward workflow
 
 For meaningful user-facing changes, explicitly assign a design-steward reviewer. The reviewer should:

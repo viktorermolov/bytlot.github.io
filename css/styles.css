@@ -224,7 +224,8 @@ h1 {
 .assumptions-card strong, .assumptions-card small { display: block; }
 .assumptions-card strong { font-size: 0.88rem; }
 .assumptions-card small { margin-top: 2px; color: var(--muted); }
-.edit-label { color: #25664f; font-size: 0.82rem; font-weight: 800; }
+.edit-label { flex: none; color: #25664f; font-size: 0.82rem; font-weight: 800; }
+.assumptions-card summary > span:first-child { min-width: 0; }
 .assumptions-card[open] > summary { border-bottom: 1px solid var(--line); }
 .assumptions-card[open] .edit-label { color: var(--muted); }
 .assumptions-body { padding: 22px 18px 20px; background: #f8faf7; }
@@ -316,6 +317,17 @@ h1 {
 }
 .form-error:not([hidden]) + .calculate-button { margin-top: 12px; }
 .calculate-button:hover { background: #cefa59; }
+.example-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 10px;
+  color: var(--brand);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+.calculator-form > .example-link { margin-top: 4px; }
 
 .results-panel {
   position: sticky;
@@ -326,6 +338,18 @@ h1 {
   border-color: var(--brand);
 }
 .results-panel .eyebrow { color: #a6d5c2; }
+.offer-verdict {
+  display: inline-block;
+  margin: 16px 0 0;
+  padding: 6px 10px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-md);
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+.offer-verdict.is-met { color: var(--signal-ink); background: var(--signal); border-color: var(--signal); }
+.offer-verdict:not([hidden]) + .primary-result { margin-top: 16px; }
+.results-panel.is-stale .offer-verdict { opacity: 0.45; }
 .primary-result {
   margin: 24px 0 4px;
   font-variant-numeric: tabular-nums;
@@ -403,6 +427,19 @@ h1 {
 .method-list span { display: block; margin-bottom: 48px; color: #4c7667; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; }
 .method-list strong { display: block; margin-bottom: 8px; font-size: 1rem; }
 .method-list p { margin: 0; color: var(--muted); font-size: 0.82rem; }
+
+.examples-section { padding-top: clamp(48px, 7vw, 80px); }
+.example-basis { max-width: 860px; margin: 24px 0; color: var(--muted); font-size: 0.9rem; }
+.example-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.worked-example { padding-top: 24px; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
+.worked-example h3 { margin: 0 0 12px; font-size: 1.25rem; line-height: 1.25; letter-spacing: -0.025em; }
+.worked-example > p:not(.step-label) { color: var(--muted); font-size: 0.9rem; }
+.worked-example dl { margin: 20px 0; }
+.worked-example dl div { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.worked-example dt { color: var(--muted); font-size: 0.84rem; }
+.worked-example dd { flex: none; margin: 0; font-weight: 750; font-variant-numeric: tabular-nums; }
+.worked-example .example-conclusion { color: var(--ink); }
+.example-footnote { margin: 24px 0 0; color: var(--muted); font-size: 0.8rem; }
 
 .faq-section { max-width: 880px; padding: clamp(72px, 10vw, 120px) 0 40px; }
 .faq-list { margin-top: 32px; border-top: 1px solid var(--line); }
@@ -590,18 +627,26 @@ h1 {
   .calculator-layout { grid-template-columns: 1fr; }
   .results-panel { position: static; }
   .explanation-section { grid-template-columns: 1fr; }
+  .example-list { grid-template-columns: 1fr; gap: 24px; }
   .method-list { grid-template-columns: 1fr; }
   .method-list li { min-height: 0; }
   .method-list span { margin-bottom: 28px; }
 }
 @media (max-width: 520px) {
-  .site-header { min-height: 64px; padding-inline: 18px; }
-  .page-shell { width: min(100% - 24px, 1180px); padding-top: 30px; }
-  h1 { font-size: clamp(2.3rem, 13vw, 3.5rem); }
+  .site-header { min-height: 64px; padding: 10px 18px; }
+  .page-shell { width: min(100% - 24px, 1180px); padding-top: 20px; }
+  .intro { margin-bottom: 20px; }
+  h1 { margin-bottom: 12px; font-size: clamp(2.15rem, 10vw, 3rem); }
+  .lede { margin-bottom: 8px; }
+  .platform-note { font-size: 0.8rem; }
+  .section-heading { margin-bottom: 12px; gap: 10px; }
+  .calculator-form .step-label, .calculator-form .estimate-badge { display: none; }
+  .form-intro { margin: -4px 0 12px; }
   .field-grid { grid-template-columns: 1fr; gap: 14px; }
   .field--wide { grid-column: auto; }
-  .calculator-form { padding: 20px 16px; }
-  .assumptions-card--shared { margin: 14px 12px 0; }
+  .calculator-form { padding: 16px; }
+  .assumptions-card--shared { margin: 12px 12px 0; }
+  .assumptions-card summary { min-height: 60px; padding: 10px 12px; gap: 10px; }
   .assumptions-body { padding-inline: 14px; }
   .cost-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cost-grid .input-prefix { padding-left: 9px; }
