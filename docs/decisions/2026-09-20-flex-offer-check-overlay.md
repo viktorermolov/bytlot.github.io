@@ -18,6 +18,10 @@ Rationale (owner): Flex offers are claimed in seconds — there is no time to
 screenshot and switch apps. An overlay is the only UX honest to the "instant"
 promise. On-device reading and battery-light constraints are unchanged.
 
+Latency constraint (owner, 2026-09-20): an instant offer gives the driver one
+minute to accept, so the verdict must land in seconds — comfortably inside
+that window. Anything slower misses the decision entirely.
+
 ## Consequences
 
 - Landing page (`flex-offer-check/index.html`), main-page banner, plan
