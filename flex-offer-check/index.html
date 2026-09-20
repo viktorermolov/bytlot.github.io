@@ -22,11 +22,10 @@
 <meta name="description" content="A screen overlay for Amazon Flex: the verdict appears right on the offer screen, checked against your real vehicle costs. Private, on-device, battery-light. Join the waitlist.">
 <link rel="stylesheet" href="/css/styles.css">
 <style>
-  .wl-wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 64px; }
-  .wl-kicker { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; }
-  .wl-wrap h1 { font-size: 34px; line-height: 1.2; margin: 12px 0; }
-  .wl-lede { font-size: 18px; color: var(--muted); }
-  .wl-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 24px 0; }
+  .wl-intro { max-width: 760px; }
+  .site-footer a { color: #fff; }
+  .wl-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+            padding: 24px; margin: 24px 0; max-width: 760px; }
   .wl-card h2 { font-size: 18px; margin: 0 0 8px; }
   ul.wl-tick { list-style: none; padding: 0; margin: 12px 0; }
   ul.wl-tick li { padding-left: 28px; position: relative; margin: 8px 0; }
@@ -40,13 +39,14 @@
   .wl-msg { border-radius: 8px; padding: 12px; margin-top: 12px; display: none; }
   .wl-msg.ok { display: block; background: var(--surface-soft); color: var(--brand-strong); border: 1px solid var(--brand); }
   .wl-msg.err { display: block; background: var(--surface); color: #a50e0e; border: 1px solid #a50e0e; }
-  .wl-wrap details { margin: 10px 0; }
-  .wl-wrap summary { font-weight: 600; cursor: pointer; }
-  .wl-footer { margin-top: 48px; font-size: 13px; color: var(--muted); }
+  .page-shell details { margin: 10px 0; max-width: 760px; }
+  .page-shell summary { font-weight: 600; cursor: pointer; }
+  .wl-faq-title { max-width: 760px; }
   #wl-turnstile { margin-top: 12px; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#waitlist">Skip to waitlist</a>
 <header class="site-header">
   <a class="brand" href="/" aria-label="BytLot home">
     <img class="brand-mark" src="/favicon_io/bytlot-mark.svg?v=20260828-brand" alt="" width="32" height="32">
@@ -55,12 +55,14 @@
   <span class="product-name">Driver Profit</span>
   <span class="privacy-note">Private by design · calculated here</span>
 </header>
-<div class="wl-wrap">
-
-  <h1>Know if the Flex offer is worth it — before you tap Accept.</h1>
-  <p class="wl-lede">A screen overlay on your Flex app. The verdict appears right on the offer —
-  in seconds, inside the 1-minute accept window — checked against <em>your</em> real vehicle costs:
-  real $/hour, real $/mile, and a straight take-or-skip call.</p>
+<main class="page-shell">
+  <section class="intro" aria-labelledby="page-title">
+    <p class="eyebrow">Know the real number.</p>
+    <h1 id="page-title">Know if the Flex offer is worth it — before you tap Accept.</h1>
+    <p class="lede">A screen overlay on your Flex app. The verdict appears right on the offer —
+    in seconds, inside the 1-minute accept window — checked against <em>your</em> real vehicle costs:
+    real $/hour, real $/mile, and a straight take-or-skip call.</p>
+  </section>
 
   <div class="wl-card">
     <h2>How it will work</h2>
@@ -72,7 +74,7 @@
     </ul>
   </div>
 
-  <div class="wl-card">
+  <div class="wl-card" id="waitlist">
     <h2>We&rsquo;re building it now. Want in early?</h2>
     <p>Tell us you want it — and what you&rsquo;d want it to check. Early access will be free.</p>
     <form id="waitlist-form" novalidate>
@@ -87,7 +89,7 @@
     </form>
   </div>
 
-  <h2>Plain answers</h2>
+  <h2 class="wl-faq-title">Plain answers</h2>
   <details>
     <summary>Does it record or send my screen anywhere?</summary>
     <p>No. Reading happens on your phone. That&rsquo;s the whole point — no uploads, no per-scan fees, nothing to leak.</p>
@@ -105,10 +107,14 @@
     <p>No. Independent tool by a Flex driver, for drivers. Platform-neutral math.</p>
   </details>
 
-  <footer class="wl-footer">
-    <p>BytLot — know the real number. <a href="/">Driver Profit calculator</a></p>
-  </footer>
-</div>
+</main>
+<footer class="site-footer">
+  <div class="site-footer__brand"><strong>BytLot</strong><span>Know the real number.</span></div>
+  <div class="site-footer__actions">
+    <p>Flex Offer Check is an independent concept by a Flex driver — not affiliated with Amazon.</p>
+    <p><a href="/">Driver Profit calculator</a></p>
+  </div>
+</footer>
 
 <script>
 (function () {
