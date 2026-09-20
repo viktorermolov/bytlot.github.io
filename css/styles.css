@@ -85,6 +85,24 @@ button { color: inherit; }
 }
 .privacy-note { margin-left: auto; color: #d9e6df; font-size: 0.78rem; }
 
+.announce-banner {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+.announce-banner p {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 10px 0;
+  font-size: 0.92rem;
+  text-align: center;
+}
+.announce-banner a {
+  color: inherit;
+  font-weight: 760;
+  text-underline-offset: 3px;
+}
+.announce-banner a:hover { text-decoration-thickness: 2px; }
+
 .page-shell {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
