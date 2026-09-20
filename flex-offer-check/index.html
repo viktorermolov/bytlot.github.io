@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--
+  Flex Offer Check — waitlist landing (demand test, NOT a product launch)
+  Deploy notes:
+  - Place at /flex-offer-check/index.html in the repo. GitHub Pages auto-deploys on push to main.
+  - Payload contract VERIFIED against worker/src/index.js (2026-09-20):
+    top-level keys exactly {feedbackType, message, turnstileToken, context};
+    feedbackType="other" (allowlist: suggestion|bug|confusing|other);
+    context.pagePath MUST be "/" or the worker rejects (fail-closed);
+    calculatorMode="offer"; viewportCategory from width (<=520 mobile, <=800 tablet, else desktop).
+    Votes are counted by the "WAITLIST:flex-offer-check" tag in message — no worker change needed.
+  - Turnstile sitekey is the site's own public key (same hostname bytlot.com), action "feedback_submit".
+  - noindex kept on purpose: demand test must not change search intent (repo SEO guardrails).
+  - Before release: `npm run check`, mobile/a11y pass, record decision in docs/decisions/ (new page).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Flex Offer Check — know if the offer is worth it | BytLot</title>
+<meta name="description" content="Screenshot an Amazon Flex offer, get an instant worth-it check from your real vehicle costs. Private, on-device, battery-light. Join the waitlist.">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+  .wl-wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 64px; }
+  .wl-kicker { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; }
+  .wl-wrap h1 { font-size: 34px; line-height: 1.2; margin: 12px 0; }
+  .wl-lede { font-size: 18px; color: var(--muted); }
+  .wl-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 24px 0; }
+  .wl-card h2 { font-size: 18px; margin: 0 0 8px; }
+  ul.wl-tick { list-style: none; padding: 0; margin: 12px 0; }
+  ul.wl-tick li { padding-left: 28px; position: relative; margin: 8px 0; }
+  ul.wl-tick li::before { content: "✓"; position: absolute; left: 4px; color: var(--brand); font-weight: 700; }
+  .wl-card label { display: block; font-weight: 600; margin: 12px 0 6px; }
+  .wl-card textarea { width: 100%; min-height: 88px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; font: inherit; background: var(--canvas); }
+  .wl-cta { background: var(--brand); color: #fff; border: 0; border-radius: 8px; padding: 12px 20px;
+            font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 12px; width: 100%; }
+  .wl-cta:disabled { opacity: .6; cursor: wait; }
+  .wl-note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .wl-msg { border-radius: 8px; padding: 12px; margin-top: 12px; display: none; }
+  .wl-msg.ok { display: block; background: var(--surface-soft); color: var(--brand-strong); border: 1px solid var(--brand); }
+  .wl-msg.err { display: block; background: var(--surface); color: #a50e0e; border: 1px solid #a50e0e; }
+  .wl-wrap details { margin: 10px 0; }
+  .wl-wrap summary { font-weight: 600; cursor: pointer; }
+  .wl-footer { margin-top: 48px; font-size: 13px; color: var(--muted); }
+  #wl-turnstile { margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wl-wrap">
+
+  <p class="wl-kicker">BytLot · Know the real number</p>
+  <h1>Know if the Flex offer is worth it — before you tap Accept.</h1>
+  <p class="wl-lede">Screenshot the offer. Get an instant check against <em>your</em> real vehicle costs:
+  real $/hour, real $/mile, and a straight take-or-skip call.</p>
+
+  <div class="wl-card">
+    <h2>How it will work</h2>
+    <ul class="wl-tick">
+      <li><strong>Screenshot the offer</strong> in the Amazon Flex app — payout, time, miles.</li>
+      <li><strong>On-device check.</strong> The screenshot is read on your phone and never sent anywhere. No account, no uploads.</li>
+      <li><strong>Your numbers, not averages.</strong> Uses your vehicle cost per mile and your hourly target — the same math as our Driver Profit calculator.</li>
+      <li><strong>Battery-light.</strong> Nothing runs in the background; it only works when you ask it to.</li>
+    </ul>
+  </div>
+
+  <div class="wl-card">
+    <h2>We&rsquo;re building it now. Want in early?</h2>
+    <p>Tell us you want it — and what you&rsquo;d want it to check. Early access will be free.</p>
+    <form id="waitlist-form" novalidate>
+      <label for="wl-note">What should it check for you? <span class="wl-note">(optional)</span></label>
+      <textarea id="wl-note" name="note" maxlength="500"
+        placeholder="e.g. I want it to flag offers under $22/hr after gas…"></textarea>
+      <div id="wl-turnstile" aria-hidden="true"></div>
+      <button type="submit" class="wl-cta" id="wl-submit">Count me in</button>
+      <div class="wl-msg" id="wl-msg" role="status" aria-live="polite"></div>
+      <p class="wl-note">No email collected. This only records an anonymous &ldquo;I want this&rdquo; vote
+      through BytLot&rsquo;s existing feedback pipeline, so we can measure real demand before building.</p>
+    </form>
+  </div>
+
+  <h2>Plain answers</h2>
+  <details>
+    <summary>Does it send my screenshots anywhere?</summary>
+    <p>No. Reading happens on your phone. That&rsquo;s the whole point — no uploads, no per-scan fees, nothing to leak.</p>
+  </details>
+  <details>
+    <summary>Will it drain my battery?</summary>
+    <p>No background tracking. It runs only when you open it and ask for a check — built for drivers who already fight battery drain.</p>
+  </details>
+  <details>
+    <summary>How much will it cost?</summary>
+    <p>Early access is free. If it earns its keep, the plan is a small freemium — a few free checks a day, then a couple dollars a month. No price until it proves itself.</p>
+  </details>
+  <details>
+    <summary>Is this affiliated with Amazon?</summary>
+    <p>No. Independent tool by a Flex driver, for drivers. Platform-neutral math.</p>
+  </details>
+
+  <footer class="wl-footer">
+    <p>BytLot — know the real number. <a href="/">Driver Profit calculator</a></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  /* Contract verified against worker/src/index.js + js/feedback.js (2026-09-20).
+     Any change to keys, types, or context shape will be rejected fail-closed. */
+  var FEEDBACK_ENDPOINT = "/api/feedback";
+  var TURNSTILE_SITEKEY = "0x4AAAAAAEjSYdC4ZDUgLaHD"; // site's own public key, hostname bytlot.com
+  var TURNSTILE_ACTION = "feedback_submit";
+  var WAITLIST_TAG = "WAITLIST:flex-offer-check";
+  var MIN_NOTELESS_OK = true;
+
+  var form = document.getElementById("waitlist-form");
+  var note = document.getElementById("wl-note");
+  var submit = document.getElementById("wl-submit");
+  var msg = document.getElementById("wl-msg");
+  var turnstileBox = document.getElementById("wl-turnstile");
+  var turnstileApi = null;
+  var widgetId;
+
+  function show(text, ok) {
+    msg.textContent = text;
+    msg.className = "wl-msg " + (ok ? "ok" : "err");
+  }
+
+  function viewportCategory(width) {
+    if (width <= 520) return "mobile";
+    if (width <= 800) return "tablet";
+    return "desktop";
+  }
+
+  function loadTurnstile() {
+    if (turnstileApi) return Promise.resolve(turnstileApi);
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      s.async = true; s.defer = true;
+      s.onload = function () {
+        if (window.turnstile) { turnstileApi = window.turnstile; resolve(turnstileApi); }
+        else reject(new Error("turnstile missing"));
+      };
+      s.onerror = function () { reject(new Error("turnstile load failed")); };
+      document.head.appendChild(s);
+    });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    submit.disabled = true;
+    show("Checking…", true);
+    loadTurnstile().then(function (api) {
+      widgetId = api.render(turnstileBox, {
+        sitekey: TURNSTILE_SITEKEY,
+        action: TURNSTILE_ACTION,
+        appearance: "always",
+        size: "flexible",
+        theme: "light",
+        callback: function (token) { send(token); },
+        "expired-callback": function () { fail("Verification expired. Please try again."); },
+        "timeout-callback": function () { fail("Verification timed out. Please try again."); },
+        "error-callback": function () { fail("Verification could not complete. Please try again."); }
+      });
+      api.execute(widgetId);
+    }).catch(function () { fail("Could not load the spam check. Please try again."); });
+  });
+
+  function fail(text) {
+    submit.disabled = false;
+    show(text, false);
+  }
+
+  function send(token) {
+    var text = note.value.trim();
+    var message = WAITLIST_TAG + (text ? " | " + text.slice(0, 500) : " | (no note)");
+    var payload = {
+      feedbackType: "other",
+      message: message,
+      turnstileToken: token,
+      context: {
+        pagePath: "/",            // worker requires exactly "/"
+        calculatorMode: "offer",  // closest allowlisted mode
+        appVersion: null,
+        viewportCategory: viewportCategory(window.innerWidth || 800)
+      }
+    };
+    fetch(FEEDBACK_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      credentials: "omit",
+      referrerPolicy: "no-referrer"
+    }).then(function (r) {
+      submit.disabled = false;
+      if (r.ok) {
+        form.reset();
+        show("You're counted in. We'll build it if enough drivers want it.", true);
+      } else if (r.status === 429) {
+        show("Too many attempts. Please wait a few minutes and try again.", false);
+      } else {
+        show("Something went wrong. Please try again.", false);
+      }
+    }).catch(function () { fail("Network error. Please try again."); });
+  }
+})();
+</script>
+</body>
+</html>
