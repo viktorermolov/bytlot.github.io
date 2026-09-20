@@ -19,7 +19,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Flex Offer Check — know if the offer is worth it | BytLot</title>
-<meta name="description" content="A screen overlay for Amazon Flex: the verdict appears right on the offer screen, checked against your real vehicle costs. Private, on-device, battery-light. Join the waitlist.">
+<meta name="description" content="An Android background watcher for Amazon Flex: when an instant offer appears, the verdict lands in a notification — real $/hour after your vehicle costs. Private, on-device. Join the waitlist.">
 <link rel="stylesheet" href="/css/styles.css">
 <style>
   .wl-intro { max-width: 760px; }
@@ -59,18 +59,20 @@
   <section class="intro" aria-labelledby="page-title">
     <p class="eyebrow">Know the real number.</p>
     <h1 id="page-title">Know if the Flex offer is worth it — before you tap Accept.</h1>
-    <p class="lede">A screen overlay on your Flex app. The verdict appears right on the offer —
-    in seconds, inside the 1-minute accept window — checked against <em>your</em> real vehicle costs:
-    real $/hour, real $/mile, and a straight take-or-skip call.</p>
+    <p class="lede">It runs in the background and watches for instant offers. When one appears, it reads
+    the offer on your screen and drops the verdict into a notification — in seconds, inside the
+    1-minute accept window: real $/hour, real $/mile after <em>your</em> vehicle costs, and a straight
+    take-or-skip call.</p>
   </section>
 
   <div class="wl-card">
     <h2>How it will work</h2>
     <ul class="wl-tick">
-      <li><strong>Overlay on your Flex app.</strong> It reads the offer right on your screen — payout, time, miles. No screenshots, no app-switching.</li>
-      <li><strong>On-device check.</strong> The offer is read on your phone and never sent anywhere. No account, no uploads.</li>
+      <li><strong>Always watching.</strong> It runs in the background and wakes the moment an instant offer appears — no screenshots, no app-switching.</li>
+      <li><strong>Reads the offer on your screen</strong> — payout, time, miles — and puts the verdict in a notification: real $/hour, real $/mile, take-or-skip.</li>
+      <li><strong>On-device.</strong> Reading happens on your phone and is never sent anywhere. No account, no uploads.</li>
       <li><strong>Your numbers, not averages.</strong> Uses your vehicle cost per mile and your hourly target — the same math as our Driver Profit calculator.</li>
-      <li><strong>Battery-light.</strong> Nothing runs in the background; it only works when you ask it to.</li>
+      <li><strong>Light on battery.</strong> It idles until an offer appears — no continuous screen recording.</li>
     </ul>
   </div>
 
@@ -96,7 +98,7 @@
   </details>
   <details>
     <summary>Will it drain my battery?</summary>
-    <p>No background tracking. It runs only when you open it and ask for a check — built for drivers who already fight battery drain.</p>
+    <p>It does run in the background — that&rsquo;s the only way to catch the 1-minute accept window. But it&rsquo;s event-driven: it idles until an offer appears, reads the screen once, and shows the verdict in a notification. No continuous screen recording, nothing uploaded.</p>
   </details>
   <details>
     <summary>How much will it cost?</summary>
