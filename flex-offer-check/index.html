@@ -76,22 +76,9 @@
     </ul>
   </div>
 
-  <div class="wl-card" id="early-access">
-    <h2>Lifetime Early Access &mdash; $19 <span class="wl-note">one-time</span></h2>
-    <p>Skip the line. Lock the early-bird price forever and be first in when it launches.</p>
-    <ul class="wl-tick">
-      <li><strong>Pay once, keep it forever.</strong> No subscription, no per-scan fees.</li>
-      <li><strong>First in line</strong> at launch &mdash; and a say in what gets built first.</li>
-      <li><strong>Launch guarantee:</strong> if Flex Offer Check doesn&rsquo;t launch, you get a full refund. No questions.</li>
-    </ul>
-    <a class="wl-cta" style="display:block;text-align:center;text-decoration:none;"
-       href="https://buy.polar.sh/polar_cl_q4nDIIgKkBmGViccAr3ZxHEJguSi70enN24Hh1M7Atn">Get lifetime access &mdash; $19</a>
-    <p class="wl-note">Secure checkout via Polar. This is a pre-launch purchase &mdash; the app is in development right now.</p>
-  </div>
-
   <div class="wl-card" id="waitlist">
     <h2>We&rsquo;re building it now. Want in early?</h2>
-    <p>Not ready to pay? Tell us you want it &mdash; and what you&rsquo;d want it to check. Free, no email needed.</p>
+    <p>Tell us you want it — and what you&rsquo;d want it to check. Early access will be free.</p>
     <form id="waitlist-form" novalidate>
       <label for="wl-note">What should it check for you? <span class="wl-note">(optional)</span></label>
       <textarea id="wl-note" name="note" maxlength="500"
@@ -115,7 +102,7 @@
   </details>
   <details>
     <summary>How much will it cost?</summary>
-    <p>Lifetime Early Access is a one-time $19 while we&rsquo;re in pre-launch &mdash; pay once, keep it forever, no subscription. After launch the plan is a small freemium: a few free checks a day, then a couple dollars a month.</p>
+    <p>Early access is free. If it earns its keep, the plan is a small freemium — a few free checks a day, then a couple dollars a month. No price until it proves itself.</p>
   </details>
   <details>
     <summary>Is this affiliated with Amazon?</summary>
@@ -149,13 +136,6 @@
   var turnstileBox = document.getElementById("wl-turnstile");
   var turnstileApi = null;
   var widgetId;
-
-  // Post-checkout thank-you (Polar redirects here on success).
-  try {
-    if (new URLSearchParams(window.location.search).get("purchased") === "1") {
-      show("Payment received — you're on the early access list. We'll email you the moment it launches.", true);
-    }
-  } catch (e) { /* ignore */ }
 
   function show(text, ok) {
     msg.textContent = text;
