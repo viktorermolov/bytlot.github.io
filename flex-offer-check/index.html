@@ -19,14 +19,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Flex Offer Check — know if the offer is worth it | BytLot</title>
-<meta name="description" content="Screenshot an Amazon Flex offer, get an instant worth-it check from your real vehicle costs. Private, on-device, battery-light. Join the waitlist.">
+<meta name="description" content="An Android background watcher for Amazon Flex: when an instant offer appears, the verdict lands in a notification — real $/hour after your vehicle costs. Private, on-device. Join the waitlist.">
 <link rel="stylesheet" href="/css/styles.css">
 <style>
-  .wl-wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 64px; }
-  .wl-kicker { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; }
-  .wl-wrap h1 { font-size: 34px; line-height: 1.2; margin: 12px 0; }
-  .wl-lede { font-size: 18px; color: var(--muted); }
-  .wl-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 24px 0; }
+  .wl-intro { max-width: 760px; }
+  .site-footer a { color: #fff; }
+  .wl-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+            padding: 24px; margin: 24px 0; max-width: 760px; }
   .wl-card h2 { font-size: 18px; margin: 0 0 8px; }
   ul.wl-tick { list-style: none; padding: 0; margin: 12px 0; }
   ul.wl-tick li { padding-left: 28px; position: relative; margin: 8px 0; }
@@ -38,29 +37,42 @@
   .wl-cta:disabled { opacity: .6; cursor: wait; }
   .wl-note { font-size: 13px; color: var(--muted); margin-top: 10px; }
   .wl-msg { border-radius: 8px; padding: 12px; margin-top: 12px; display: none; }
-  .wl-msg.ok { display: block; background: #e6f4ea; color: #0f7b3d; }
-  .wl-msg.err { display: block; background: #fdecea; color: #a50e0e; }
-  .wl-wrap details { margin: 10px 0; }
-  .wl-wrap summary { font-weight: 600; cursor: pointer; }
-  .wl-footer { margin-top: 48px; font-size: 13px; color: var(--muted); }
+  .wl-msg.ok { display: block; background: var(--surface-soft); color: var(--brand-strong); border: 1px solid var(--brand); }
+  .wl-msg.err { display: block; background: var(--surface); color: #a50e0e; border: 1px solid #a50e0e; }
+  .page-shell details { margin: 10px 0; max-width: 760px; }
+  .page-shell summary { font-weight: 600; cursor: pointer; }
+  .wl-faq-title { max-width: 760px; }
   #wl-turnstile { margin-top: 12px; }
 </style>
 </head>
 <body>
-<div class="wl-wrap">
-
-  <p class="wl-kicker">BytLot · Know the real number</p>
-  <h1>Know if the Flex offer is worth it — before you tap Accept.</h1>
-  <p class="wl-lede">Screenshot the offer. Get an instant check against <em>your</em> real vehicle costs:
-  real $/hour, real $/mile, and a straight take-or-skip call.</p>
+<a class="skip-link" href="#waitlist">Skip to waitlist</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="BytLot home">
+    <img class="brand-mark" src="/favicon_io/bytlot-mark.svg?v=20260828-brand" alt="" width="32" height="32">
+    <span>BytLot</span>
+  </a>
+  <span class="product-name">Driver Profit</span>
+  <span class="privacy-note">Private by design · calculated here</span>
+</header>
+<main class="page-shell">
+  <section class="intro" aria-labelledby="page-title">
+    <p class="eyebrow">Know the real number.</p>
+    <h1 id="page-title">Know if the Flex offer is worth it — before you tap Accept.</h1>
+    <p class="lede">It runs in the background and watches for instant offers. When one appears, it reads
+    the offer on your screen and drops the verdict into a notification — in seconds, inside the
+    1-minute accept window: real $/hour, real $/mile after <em>your</em> vehicle costs, and a straight
+    take-or-skip call.</p>
+  </section>
 
   <div class="wl-card">
     <h2>How it will work</h2>
     <ul class="wl-tick">
-      <li><strong>Screenshot the offer</strong> in the Amazon Flex app — payout, time, miles.</li>
-      <li><strong>On-device check.</strong> The screenshot is read on your phone and never sent anywhere. No account, no uploads.</li>
+      <li><strong>Always watching.</strong> It runs in the background and wakes the moment an instant offer appears — no screenshots, no app-switching.</li>
+      <li><strong>Reads the offer on your screen</strong> — payout, time, miles — and puts the verdict in a notification: real $/hour, real $/mile, take-or-skip.</li>
+      <li><strong>On-device.</strong> Reading happens on your phone and is never sent anywhere. No account, no uploads.</li>
       <li><strong>Your numbers, not averages.</strong> Uses your vehicle cost per mile and your hourly target — the same math as our Driver Profit calculator.</li>
-      <li><strong>Battery-light.</strong> Nothing runs in the background; it only works when you ask it to.</li>
+      <li><strong>Light on battery.</strong> It idles until an offer appears — no continuous screen recording.</li>
     </ul>
   </div>
 
@@ -77,7 +89,7 @@
     <p class="wl-note">Secure checkout via Polar. This is a pre-launch purchase &mdash; the app is in development right now.</p>
   </div>
 
-  <div class="wl-card">
+  <div class="wl-card" id="waitlist">
     <h2>We&rsquo;re building it now. Want in early?</h2>
     <p>Not ready to pay? Tell us you want it &mdash; and what you&rsquo;d want it to check. Free, no email needed.</p>
     <form id="waitlist-form" novalidate>
@@ -92,14 +104,14 @@
     </form>
   </div>
 
-  <h2>Plain answers</h2>
+  <h2 class="wl-faq-title">Plain answers</h2>
   <details>
-    <summary>Does it send my screenshots anywhere?</summary>
+    <summary>Does it record or send my screen anywhere?</summary>
     <p>No. Reading happens on your phone. That&rsquo;s the whole point — no uploads, no per-scan fees, nothing to leak.</p>
   </details>
   <details>
     <summary>Will it drain my battery?</summary>
-    <p>No background tracking. It runs only when you open it and ask for a check — built for drivers who already fight battery drain.</p>
+    <p>It does run in the background — that&rsquo;s the only way to catch the 1-minute accept window. But it&rsquo;s event-driven: it idles until an offer appears, reads the screen once, and shows the verdict in a notification. No continuous screen recording, nothing uploaded.</p>
   </details>
   <details>
     <summary>How much will it cost?</summary>
@@ -110,10 +122,14 @@
     <p>No. Independent tool by a Flex driver, for drivers. Platform-neutral math.</p>
   </details>
 
-  <footer class="wl-footer">
-    <p>BytLot — know the real number. <a href="/">Driver Profit calculator</a></p>
-  </footer>
-</div>
+</main>
+<footer class="site-footer">
+  <div class="site-footer__brand"><strong>BytLot</strong><span>Know the real number.</span></div>
+  <div class="site-footer__actions">
+    <p>Flex Offer Check is an independent concept by a Flex driver — not affiliated with Amazon.</p>
+    <p><a href="/">Driver Profit calculator</a></p>
+  </div>
+</footer>
 
 <script>
 (function () {
