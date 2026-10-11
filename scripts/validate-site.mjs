@@ -55,6 +55,8 @@ assert.match(css, /--space-form-section: 22px;/);
 assert.match(css, /\.calculate-button \{[\s\S]*?margin-top: var\(--space-form-section\);/);
 assert.match(css, /\.form-error:not\(\[hidden\]\) \+ \.calculate-button \{ margin-top: 12px; \}/);
 assert.doesNotMatch(html, /<input[^>]+type="email"/i);
+assert.match(html, /<a href="mailto:viktor@bytlot\.com">viktor@bytlot\.com<\/a>/);
+assert.doesNotMatch(html, /feedback-open|feedback-dialog|feedback\.js/i);
 const assetExclusions = new Set(
   assetsIgnore.split(/\r?\n/u).map((line) => line.trim()).filter(Boolean)
 );
