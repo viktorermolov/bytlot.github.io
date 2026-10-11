@@ -8,10 +8,6 @@ const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "css/styles.css"), "utf8");
 const app = readFileSync(join(root, "js/app.js"), "utf8");
 const settings = readFileSync(join(root, "js/settings.js"), "utf8");
-const feedback = readFileSync(join(root, "js/feedback.js"), "utf8");
-const worker = readFileSync(join(root, "worker/src/index.js"), "utf8");
-const workerConfig = readFileSync(join(root, "worker/wrangler.jsonc"), "utf8");
-const feedbackMigration = readFileSync(join(root, "worker/migrations/0001_create_feedback.sql"), "utf8");
 const assetsIgnore = readFileSync(join(root, ".assetsignore"), "utf8");
 const pageTitle = "Driver Profit Calculator for Delivery &amp; Gig Work | BytLot";
 const pageDescription = "Estimate delivery and gig-work profit after fuel or charging, maintenance, tires, depreciation, and other vehicle costs. Check a shift or compare an offer.";
@@ -58,60 +54,7 @@ assert.match(html, /<label class="field field--wide" for="miles-driven">/);
 assert.match(css, /--space-form-section: 22px;/);
 assert.match(css, /\.calculate-button \{[\s\S]*?margin-top: var\(--space-form-section\);/);
 assert.match(css, /\.form-error:not\(\[hidden\]\) \+ \.calculate-button \{ margin-top: 12px; \}/);
-assert.match(html, /<button id="feedback-open"[^>]+aria-haspopup="dialog"[^>]*>Feedback<\/button>/);
-assert.match(html, /<dialog id="feedback-dialog"[^>]+aria-labelledby="feedback-title"[^>]+data-turnstile-sitekey="[^"]+">/);
-assert.match(html, /<h2 id="feedback-title" tabindex="-1">Help improve BytLot<\/h2>/);
-assert.match(html, /<select id="feedback-type"[^>]+required>/);
-assert.match(html, /<textarea id="feedback-message"[^>]+required><\/textarea>/);
-assert.match(html, /10–2,000 characters\./);
-assert.match(html, /No email or account needed\. We store your message and basic page context—not your calculator values\./);
-assert.match(html, /Thanks — your feedback was received\./);
 assert.doesNotMatch(html, /<input[^>]+type="email"/i);
-const feedbackClickHandlerStart = app.indexOf('feedbackTrigger.addEventListener("click", async () => {');
-const feedbackClickHandlerEnd = app.indexOf("\n});", feedbackClickHandlerStart);
-const feedbackDynamicImport = 'import("./feedback.js?v=20260831-feedback")';
-const feedbackDynamicImportIndex = app.indexOf(feedbackDynamicImport);
-assert.ok(feedbackClickHandlerStart >= 0, "Missing Feedback click handler.");
-assert.ok(feedbackClickHandlerEnd > feedbackClickHandlerStart, "Feedback click handler is incomplete.");
-assert.equal(
-  app.split(feedbackDynamicImport).length - 1,
-  1,
-  "Feedback module must have exactly one dynamic import."
-);
-assert.equal(
-  (app.match(/["']\.\/feedback\.js(?:\?[^"']*)?["']/g) || []).length,
-  1,
-  "Feedback module must not also have a static or alternate import."
-);
-assert.ok(
-  feedbackDynamicImportIndex > feedbackClickHandlerStart && feedbackDynamicImportIndex < feedbackClickHandlerEnd,
-  "Feedback module must be imported only from the Feedback click handler."
-);
-assert.doesNotMatch(
-  html,
-  /<script[^>]+src=["']https:\/\/challenges\.cloudflare\.com\/turnstile\/[^"']+["'][^>]*>/i,
-  "Turnstile must not be loaded by the initial HTML."
-);
-assert.match(feedback, /const FEEDBACK_ENDPOINT = "\/api\/feedback";/);
-assert.match(feedback, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?render=explicit/);
-assert.match(feedback, /action: TURNSTILE_ACTION/);
-assert.match(feedback, /feedbackType,[\s\S]*message,[\s\S]*turnstileToken,[\s\S]*context:/);
-assert.match(feedback, /pagePath: "\/"/);
-assert.match(feedback, /referrerPolicy: "no-referrer"/);
-assert.match(feedback, /credentials: "omit"/);
-assert.match(feedback, /new AbortController\(\)/);
-assert.match(feedback, /SUBMISSION_TIMEOUT_MS = 12_000/);
-assert.doesNotMatch(feedback, /window\.location\.pathname/);
-assert.doesNotMatch(feedback, /localStorage|sessionStorage|navigator\.userAgent|document\.referrer/);
-assert.match(worker, /const FEEDBACK_PATH = "\/api\/feedback";/);
-assert.match(worker, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/siteverify/);
-assert.match(worker, /key: "feedback:submit"/);
-assert.doesNotMatch(workerConfig, /TURNSTILE_SECRET_KEY/);
-assert.match(workerConfig, /"account_id": "52a5f4d5c9b84f6ab34ad87c1651f61d"/);
-assert.match(workerConfig, /"pattern": "https:\/\/bytlot\.com\/api\/feedback\*"/);
-assert.match(workerConfig, /"database_name": "bytlot-feedback"/);
-assert.match(feedbackMigration, /CREATE TABLE feedback/);
-assert.doesNotMatch(feedbackMigration, /email|ip_address|user_agent|fingerprint|latitude|longitude/i);
 const assetExclusions = new Set(
   assetsIgnore.split(/\r?\n/u).map((line) => line.trim()).filter(Boolean)
 );
@@ -145,7 +88,6 @@ assert.equal((html.match(/<details><summary>/g) || []).length, 6, "Expected six 
 assert.match(html, /<\/html>\s*$/);
 assert.doesNotMatch(html, /coming soon|countdown|expired/i);
 assert.doesNotMatch(html, /fonts\.googleapis\.com|<script[^>]+https?:\/\//i);
-assert.ok(existsSync(join(root, "js/feedback.js")), "Missing lazy-loaded feedback module.");
 
 const localReferences = [...html.matchAll(/(?:href|src)="(\/[^"]+)"/g)]
   .map((match) => match[1])
