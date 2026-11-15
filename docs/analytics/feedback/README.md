@@ -1,5 +1,7 @@
 # Feedback review workflow
 
+> Historical record: this feedback feature and its repository commands have been retired. The current site uses email contact. External Cloudflare resource status has not been verified by the source cleanup; do not execute this document as a current runbook.
+
 ## Status and boundaries
 
 The anonymous feedback pipeline is backed by Cloudflare Worker, Turnstile, and D1. The backend and matching static frontend were released on 2026-08-31 after a controlled production submission-and-retrieval round trip. Raw feedback belongs in D1, not Git. This directory stores only metadata-only review state, workflow documentation, and sanitized aggregate conclusions.

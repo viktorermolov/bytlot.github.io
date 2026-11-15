@@ -1,5 +1,7 @@
 # User feedback
 
+> Historical record: this feedback feature and its repository commands have been retired. The current site uses email contact. External Cloudflare resource status has not been verified by the source cleanup; do not execute this document as a current runbook.
+
 ## Product purpose
 
 Feedback gives visitors a low-friction way to report a suggestion, bug, confusing behavior, or other observation without leaving Driver Profit. It is qualitative product evidence, not an account, support inbox, analytics event stream, or promise of an individual response.
