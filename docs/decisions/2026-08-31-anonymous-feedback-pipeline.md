@@ -1,5 +1,7 @@
 # Decision: Anonymous feedback pipeline
 
+> Historical record: this feedback feature and its repository commands have been retired. The current site uses email contact. External Cloudflare resource status has not been verified by the source cleanup; do not execute this document as a current runbook.
+
 - **Date:** 2026-08-31
 - **Status:** accepted and released
 

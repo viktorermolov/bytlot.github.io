@@ -34,7 +34,7 @@ assert.match(html, /minimum payout combines that vehicle cost with your hourly t
 assert.match(html, /<link rel="icon" href="\/favicon_io\/favicon\.ico\?v=20260828-brand" sizes="16x16 32x32">/);
 assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="\/favicon_io\/bytlot-mark\.svg\?v=20260828-brand">/);
 assert.match(html, /<img class="brand-mark" src="\/favicon_io\/bytlot-mark\.svg\?v=20260828-brand" alt="" width="32" height="32">/);
-assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20260904-clarity">/);
+assert.match(html, /<link rel="stylesheet" href="\/css\/styles\.css\?v=20261115-cleanup">/);
 assert.match(html, /<link rel="modulepreload" href="\/js\/calculations\.js\?v=20260831-perf">/);
 assert.match(html, /<script type="module" src="\/js\/app\.js\?v=20260904-clarity"><\/script>/);
 assert.match(app, /from "\.\/calculations\.js\?v=20260831-perf";/);
@@ -141,6 +141,13 @@ function collectTextFiles(directory) {
 
 for (const file of collectTextFiles(root)) {
   assert.doesNotMatch(readFileSync(file, "utf8"), /byt\s*lot\s*(llc|l\.l\.c\.)/i, `Former legal-entity wording found in ${file}`);
+}
+
+
+
+// Calculator forms must never serialize financial values through native GET fallback.
+for (const form of html.matchAll(/<form\b[\s\S]*?<\/form>/g)) {
+  assert.doesNotMatch(form[0], /\bname\s*=/i, "Calculator controls must not serialize values without JavaScript");
 }
 
 console.log(`Site validation passed (${new Set(localReferences).size} local references checked).`);

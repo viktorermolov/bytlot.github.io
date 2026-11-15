@@ -23,7 +23,9 @@
 - [x] No secret, account, payment, backend, analytics, or paid dependency was introduced without an approved documented decision.
 - [x] Documentation, roadmap, and decision records reflect consequential changes.
 
-## Anonymous feedback release gate (complete)
+## Historical anonymous feedback release gate (retired)
+
+The checked items below record the former release, not current requirements. Feedback commands and source no longer exist. Current validation is `npm run check`; no feedback deployment is part of this static-site cleanup.
 
 - [x] Node.js 22+ is active; `npm ci`, `npm run check:release`, Worker tests, Wrangler dry run, local D1 migration, JavaScript syntax, and Git whitespace checks pass from a clean install.
 - [x] `npm run feedback:deploy:preflight` pins the reviewed account, Worker entrypoint, narrow `https://bytlot.com/api/feedback*` route pattern, origin/hostname/action values, exact production D1 name/UUID, and production Turnstile sitekey; local `example.com`/`test` mode is rejected.

@@ -30,7 +30,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png?v=20260828-brand">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png?v=20260828-brand">
     <link rel="manifest" href="/favicon_io/site.webmanifest?v=20260828-brand">
-    <link rel="stylesheet" href="/css/styles.css?v=20260904-clarity">
+    <link rel="stylesheet" href="/css/styles.css?v=20261115-cleanup">
     <link rel="modulepreload" href="/js/calculations.js?v=20260831-perf">
     <link rel="modulepreload" href="/js/settings.js?v=20260904-clarity">
     <script type="module" src="/js/app.js?v=20260904-clarity"></script>
@@ -152,11 +152,11 @@
               </div>
               <p class="form-intro">Base payout excludes tips and bonuses.</p>
               <div class="field-grid">
-                <label class="field" for="base-pay"><span>Base payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="base-pay" name="basePay" type="number" inputmode="decimal" min="0" step="any" placeholder="120.00" required></span></label>
-                <label class="field" for="tips"><span>Tips</span><span class="input-wrap"><span class="input-prefix">$</span><input id="tips" name="tips" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
-                <label class="field" for="bonuses"><span>Bonuses</span><span class="input-wrap"><span class="input-prefix">$</span><input id="bonuses" name="bonuses" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
-                <label class="field" for="hours-worked"><span>Total time worked</span><span class="input-wrap"><input id="hours-worked" name="hours" type="number" inputmode="decimal" min="0.01" step="any" placeholder="5.5" required><span class="input-suffix">hr</span></span><small>Include waiting and return time.</small></label>
-                <label class="field field--wide" for="miles-driven"><span>Total miles driven</span><span class="input-wrap"><input id="miles-driven" name="miles" type="number" inputmode="decimal" min="0" step="any" placeholder="72" required><span class="input-suffix">mi</span></span></label>
+                <label class="field" for="base-pay"><span>Base payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="base-pay" type="number" inputmode="decimal" min="0" step="any" placeholder="120.00" required></span></label>
+                <label class="field" for="tips"><span>Tips</span><span class="input-wrap"><span class="input-prefix">$</span><input id="tips" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
+                <label class="field" for="bonuses"><span>Bonuses</span><span class="input-wrap"><span class="input-prefix">$</span><input id="bonuses" type="number" inputmode="decimal" min="0" step="any" value="0" required></span></label>
+                <label class="field" for="hours-worked"><span>Total time worked</span><span class="input-wrap"><input id="hours-worked" type="number" inputmode="decimal" min="0.01" step="any" placeholder="5.5" required><span class="input-suffix">hr</span></span><small>Include waiting and return time.</small></label>
+                <label class="field field--wide" for="miles-driven"><span>Total miles driven</span><span class="input-wrap"><input id="miles-driven" type="number" inputmode="decimal" min="0" step="any" placeholder="72" required><span class="input-suffix">mi</span></span></label>
               </div>
               <p id="shift-error" class="form-error" role="alert" hidden></p>
               <button class="calculate-button" type="submit">Calculate my real profit</button>
@@ -175,11 +175,11 @@
               </div>
               <p class="form-intro">Include wait, pickup, drop-off and return time. Add only extra return miles.</p>
               <div class="field-grid">
-                <label class="field" for="offer-payout"><span>Expected total payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="offer-payout" name="offeredPayout" type="number" inputmode="decimal" min="0" step="any" placeholder="24.00" required></span></label>
-                <label class="field" for="offer-minutes"><span>Estimated total time</span><span class="input-wrap"><input id="offer-minutes" name="estimatedMinutes" type="number" inputmode="decimal" min="1" step="any" placeholder="45" required><span class="input-suffix">min</span></span></label>
-                <label class="field" for="offer-miles"><span>Pickup-to-drop-off miles</span><span class="input-wrap"><input id="offer-miles" name="workMiles" type="number" inputmode="decimal" min="0" step="any" placeholder="18" required><span class="input-suffix">mi</span></span></label>
-                <label class="field" for="deadhead-miles"><span>Extra return / deadhead</span><span class="input-wrap"><input id="deadhead-miles" name="deadheadMiles" type="number" inputmode="decimal" min="0" step="any" value="0" required><span class="input-suffix">mi</span></span><small>Only miles not already included above.</small></label>
-                <label class="field field--wide" for="target-hourly"><span>Your target profit per hour</span><span class="input-wrap"><span class="input-prefix">$</span><input id="target-hourly" name="targetHourlyProfit" type="number" inputmode="decimal" min="0" step="any" value="22" required><span class="input-suffix">/hr</span></span></label>
+                <label class="field" for="offer-payout"><span>Expected total payout</span><span class="input-wrap"><span class="input-prefix">$</span><input id="offer-payout" type="number" inputmode="decimal" min="0" step="any" placeholder="24.00" required></span></label>
+                <label class="field" for="offer-minutes"><span>Estimated total time</span><span class="input-wrap"><input id="offer-minutes" type="number" inputmode="decimal" min="1" step="any" placeholder="45" required><span class="input-suffix">min</span></span></label>
+                <label class="field" for="offer-miles"><span>Pickup-to-drop-off miles</span><span class="input-wrap"><input id="offer-miles" type="number" inputmode="decimal" min="0" step="any" placeholder="18" required><span class="input-suffix">mi</span></span></label>
+                <label class="field" for="deadhead-miles"><span>Extra return / deadhead</span><span class="input-wrap"><input id="deadhead-miles" type="number" inputmode="decimal" min="0" step="any" value="0" required><span class="input-suffix">mi</span></span><small>Only miles not already included above.</small></label>
+                <label class="field field--wide" for="target-hourly"><span>Your target profit per hour</span><span class="input-wrap"><span class="input-prefix">$</span><input id="target-hourly" type="number" inputmode="decimal" min="0" step="any" value="22" required><span class="input-suffix">/hr</span></span></label>
               </div>
               <p id="offer-error" class="form-error" role="alert" hidden></p>
               <button class="calculate-button" type="submit">Check this offer</button>

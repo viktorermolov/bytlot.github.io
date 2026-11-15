@@ -6,10 +6,10 @@ The [2026-09-04 growth roadmap](2026-09-04-growth-roadmap.md) records the recomm
 
 **2026-09-04 progress:** the first stage is published and production verified in application commit `8277aa6`; see its [execution record](../exec-plans/completed/2026-09-04-first-use-clarity.md). Search Console accepted one recrawl request after publication. The [Search Console snapshot](../analytics/snapshots/2026-09-04-search-console.md) confirms the existing homepage is indexed with the correct canonical and a successful sitemap. The available Aug. 30–Sept. 2 performance period has zero impressions and clicks. The next bounded candidate is the single useful vehicle-cost guide; broader content expansion still needs evidence.
 
-- Monitor availability and collect explicit qualitative feedback on the two workflows and starter assumptions through the released anonymous-feedback path.
+- Monitor availability and collect explicit qualitative feedback on the two workflows and starter assumptions through the current email contact link.
 - Obtain dated usage/search evidence through the documented owner data-request process before changing priorities.
 - Use the dated Search Console baseline before expanding search-targeted pages. Ownership access and the existing sitemap were verified Sept. 4; do not resubmit or recreate them unnecessarily. Collect later comparable observations and keep content expansion bounded by the growth roadmap.
 - Keep calculation changes tested and independently reviewed when consequential.
-- Keep the released backend exception scoped to the reviewed anonymous-feedback Worker, Turnstile, and D1 pipeline. Do not introduce accounts, payment systems, analytics scripts, an admin dashboard, or platform-specific calculation logic.
+- Keep the current application static and browser-only. Do not introduce accounts, payment systems, analytics scripts, an admin dashboard, or platform-specific calculation logic.
 
-The calculator MVP and anonymous-feedback path are live at `https://bytlot.com/`; their implementation, automated checks, independent reviews, and production browser QA are complete. Follow the feedback review workflow for future evidence and keep raw messages out of Git. Usage success metrics are not yet available; do not substitute estimates for them.
+The calculator is published at `https://bytlot.com/`. The anonymous-feedback feature has been removed from the current source; earlier implementation and production QA records are historical. Keep raw messages out of Git. Usage success metrics are not yet available; do not substitute estimates for them.
